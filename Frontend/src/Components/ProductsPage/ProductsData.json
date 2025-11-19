@@ -1,0 +1,1164 @@
+[
+  {
+    "id": "1",
+    "name": "Ceramic Decorative Vase",
+    "category": "Home Decor",
+    "price": 49.99,
+    "rating": 3.1,
+    "description": "A beautifully handcrafted ceramic vase that brings a touch of elegance to any room. Ideal for fresh flowers or as a standalone decorative piece.",
+    "shortDescription": "Handmade ceramic vase for your home.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1560185127-6ec7c5670d7b?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1560185127-6ec7c5670d7b?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1543457074-4c0e2f1f0ee5?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1505691723518-34e2abbd78d1?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1560185127-6ec7c5670d7b?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Ceramic",
+      "height": "25cm",
+      "width": "12cm",
+      "weight": "1.2kg",
+      "color": "White"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Sara K.", "rating": 5, "comment": "Perfectly complements my living room decor."},
+      {"user": "James L.", "rating": 4, "comment": "Beautiful but a little heavier than expected."}
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Organic Green Tea Pack",
+    "category": "Beverages",
+    "price": 19.99,
+    "rating": 4.8,
+    "description": "Premium organic green tea leaves sourced from sustainable farms. Rich in antioxidants and naturally refreshing.",
+    "shortDescription": "Premium organic green tea leaves.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1495078065017-5647235c7ad7?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1571689935222-37aaf6a6b631?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "weight": "200g",
+      "origin": "China",
+      "ingredients": "100% Green Tea",
+      "shelfLife": "24 months"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Anna B.", "rating": 5, "comment": "Tastes so pure and refreshing."},
+      {"user": "Ben P.", "rating": 4, "comment": "Great flavor but packaging could be better."}
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Noise‑Cancelling Over‑Ear Headphones",
+    "category": "Electronics",
+    "price": 149.99,
+    "rating": 4.6,
+    "description": "High-fidelity Bluetooth over-ear headphones with active noise cancellation, long battery life, and premium comfort.",
+    "shortDescription": "Premium noise-cancelling Bluetooth headphones.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "batteryLife": "30h",
+      "connectivity": "Bluetooth 5.0",
+      "color": "Black",
+      "weight": "280g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Michael S.", "rating": 5, "comment": "Impressive noise cancellation and very comfortable."},
+      {"user": "Rachel T.", "rating": 4, "comment": "Great sound, but a bit heavy for long use."}
+    ]
+  },
+  {
+    "id": "4",
+    "name": "Stainless Steel Insulated Water Bottle",
+    "category": "Kitchen & Dining",
+    "price": 24.99,
+    "rating": 4.7,
+    "description": "Keep your beverages hot or cold for hours with this double-wall, vacuum-insulated stainless steel bottle.",
+    "shortDescription": "Vacuum-insulated stainless steel bottle.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1556911220-e15b29be8c03?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1556911220-e15b29be8c03?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1585238342021-2bcd52970327?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1579466405844-0f4fc195f842?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1556911220-e15b29be8c03?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "capacity": "750ml",
+      "material": "304 Stainless Steel",
+      "color": "Silver",
+      "weight": "420g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Lisa G.", "rating": 5, "comment": "Keeps my water ice cold all day!"},
+      {"user": "George P.", "rating": 4, "comment": "Very good, but lid is bulky."}
+    ]
+  },
+  {
+    "id": "5",
+    "name": "Lightweight Running Shoes",
+    "category": "Sportswear",
+    "price": 89.99,
+    "rating": 4.3,
+    "description": "Mesh running shoes designed for breathability and comfort during long runs or daily workouts.",
+    "shortDescription": "Breathable mesh running shoes.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1528701800489-20be33f15731?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1528701800489-20be33f15731?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1599058917210-cd47622c37bf?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1528701800489-20be33f15731?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "sizeRange": "EU 38-46",
+      "weight": "280g",
+      "color": "Black/White",
+      "material": "Mesh/Fabric"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Chris R.", "rating": 5, "comment": "Very breathable and perfect for jogging."},
+      {"user": "Patty H.", "rating": 3, "comment": "Comfortable but cushioning could be better."}
+    ]
+  },
+  {
+    "id": "6",
+    "name": "Luxury Wrist Watch",
+    "category": "Fashion",
+    "price": 199.99,
+    "rating": 4.9,
+    "description": "A sleek and stylish wrist watch with leather strap and minimalist dial design. Perfect for both casual and formal wear.",
+    "shortDescription": "Minimalist leather strap wrist watch.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1511376777868-611b54f68947?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1511376777868-611b54f68947?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1516939884455-1443479fab79?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1511376777868-611b54f68947?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "movement": "Quartz",
+      "strapMaterial": "Genuine Leather",
+      "caseDiameter": "42mm",
+      "color": "Brown/Gold"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Nina W.", "rating": 5, "comment": "Elegant and timeless design."},
+      {"user": "Leo M.", "rating": 4, "comment": "Leather strap is very comfortable but could be softer."}
+    ]
+  },
+  {
+    "id": "7",
+    "name": "Women’s Floral Maxi Dress",
+    "category": "Fashion",
+    "price": 69.99,
+    "rating": 4.4,
+    "description": "Flowy floral maxi dress with breathable fabric, perfect for summer days or evening hangouts.",
+    "shortDescription": "Flowy floral maxi dress.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1520975624749-5f1f84d67b66?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1580348550714-04bdfc13158e?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Polyester",
+      "sizeRange": "S-XL",
+      "color": "Pink Floral",
+      "length": "Full-Length"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Aisha P.", "rating": 5, "comment": "Beautiful and comfortable for summer."},
+      {"user": "Zara K.", "rating": 4, "comment": "Lovely print but sizing runs a bit large."}
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Portable Bluetooth Speaker",
+    "category": "Electronics",
+    "price": 39.99,
+    "rating": 4.2,
+    "description": "Compact and rugged Bluetooth speaker with 12-hour battery life and clear sound. Ideal for travel.",
+    "shortDescription": "Portable Bluetooth speaker with 12h battery.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1572495572775-96d20d36e4b7?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "batteryLife": "12h",
+      "connectivity": "Bluetooth 5.0",
+      "color": "Blue",
+      "weight": "350g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Brian O.", "rating": 4, "comment": "Great sound for its size."},
+      {"user": "Emily R.", "rating": 3, "comment": "Battery life is okay but it could be longer."}
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Smart Fitness Watch",
+    "category": "Sportswear",
+    "price": 89.99,
+    "rating": 4.5,
+    "description": "Track your fitness journey with heart rate monitor, step counter, and sleep tracking. Sleek and lightweight design.",
+    "shortDescription": "Smart watch with fitness tracking.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1597715445912-5f62ad59a0f0?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1597715445912-5f62ad59a0f0?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1579669969473-6d8414244af8?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1583315287990-ffccaf2f8a4d?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1597715445912-5f62ad59a0f0?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "batteryLife": "7 days",
+      "waterResistant": "Yes",
+      "color": "Black",
+      "weight": "45g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Sophie L.", "rating": 5, "comment": "Perfect for daily fitness tracking."},
+      {"user": "Jake M.", "rating": 4, "comment": "Good but screen is small."}
+    ]
+  },
+  {
+    "id": "10",
+    "name": "Men’s Denim Jacket",
+    "category": "Fashion",
+    "price": 59.99,
+    "rating": 4.3,
+    "description": "Classic denim jacket with button-up front and two chest pockets. Stylish and versatile for all seasons.",
+    "shortDescription": "Classic men’s denim jacket.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1555529771-3f8da0d61407?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Denim",
+      "sizeRange": "S-XXL",
+      "color": "Blue",
+      "weight": "800g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Tom H.", "rating": 5, "comment": "Great fit and very durable."},
+      {"user": "Alex P.", "rating": 4, "comment": "A bit stiff but softens after wash."}
+    ]
+  },
+  {
+    "id": "11",
+    "name": "Leather Wallet",
+    "category": "Accessories",
+    "price": 24.99,
+    "rating": 4.2,
+    "description": "Slim leather wallet with multiple card slots and a compartment for cash. Crafted from genuine leather.",
+    "shortDescription": "Slim genuine leather wallet.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1612810806563-2f8d858e860e?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1612810806563-2f8d858e860e?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1586911690103-4361bc7d2cbe?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1586911690110-1fed4564a547?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1612810806563-2f8d858e860e?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Genuine Leather",
+      "slots": 8,
+      "color": "Brown",
+      "weight": "120g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Melanie G.", "rating": 5, "comment": "Compact and looks great."},
+      {"user": "Chris D.", "rating": 4, "comment": "Would be better with more card slots."}
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Modern Table Lamp",
+    "category": "Home Decor",
+    "price": 34.99,
+    "rating": 4.5,
+    "description": "A sleek modern table lamp with LED light and metal finish. Creates a warm and cozy ambiance.",
+    "shortDescription": "Modern metal table lamp with LED.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1498654208195-2e04a960112d?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Metal",
+      "height": "35cm",
+      "color": "Black",
+      "bulbType": "LED"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Anna M.", "rating": 5, "comment": "Stylish lamp and very functional."},
+      {"user": "Paul R.", "rating": 4, "comment": "Light is bright but stand feels a bit light."}
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Wireless Ergonomic Keyboard",
+    "category": "Electronics",
+    "price": 59.99,
+    "rating": 4.4,
+    "description": "An ergonomic wireless keyboard designed to reduce wrist strain, with long battery life and comfortable keys.",
+    "shortDescription": "Ergonomic wireless keyboard.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1526378721318-3e13a4d13e57?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "connectivity": "2.4GHz Wireless",
+      "batteryLife": "6 months",
+      "color": "White",
+      "weight": "550g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Margaret L.", "rating": 5, "comment": "Very comfortable for long typing sessions."},
+      {"user": "Kevin W.", "rating": 4, "comment": "Battery life is good but a little noisy."}
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Non-stick Cookware Set (3 pcs)",
+    "category": "Kitchen",
+    "price": 79.99,
+    "rating": 4.6,
+    "description": "Three piece non-stick cookware set includes a frying pan, saucepan, and pot. PFOA-free for healthy cooking.",
+    "shortDescription": "3‑piece non-stick cookware set.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1616628188348-468a8a1e0f52?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1616628188348-468a8a1e0f52?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1586201375761-83865001d210?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1586962199165-8be8be3dabed?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1616628188348-468a8a1e0f52?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Aluminum",
+      "pieces": 3,
+      "coating": "Non-stick",
+      "color": "Black"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Julia C.", "rating": 5, "comment": "Great set for daily cooking."},
+      {"user": "Tim B.", "rating": 4, "comment": "Very good, just wish the handles were cooler."}
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Standing Floor Lamp",
+    "category": "Home Decor",
+    "price": 54.99,
+    "rating": 4.3,
+    "description": "Elegant standing lamp with fabric shade and adjustable height. Adds a cozy glow to living rooms or bedrooms.",
+    "shortDescription": "Adjustable standing floor lamp.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1498654208195-2e04a960112d?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1498654208195-2e04a960112d?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1498654208195-2e04a960112d?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Metal + Fabric",
+      "heightMin": "120cm",
+      "heightMax": "160cm",
+      "color": "Beige"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Nancy D.", "rating": 5, "comment": "Stylish and great light."},
+      {"user": "Sam T.", "rating": 4, "comment": "Nice lamp but a little wobbly."}
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Wireless Ergonomic Mouse",
+    "category": "Electronics",
+    "price": 29.99,
+    "rating": 4.2,
+    "description": "Ergonomic wireless mouse designed to reduce wrist strain with a 2.4GHz receiver and long battery life.",
+    "shortDescription": "Comfortable wireless ergonomic mouse.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1584270354949-1c06a5b95a31?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1584270354949-1c06a5b95a31?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1526378721318-3e13a4d13e57?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1584270354949-1c06a5b95a31?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "connectivity": "2.4GHz",
+      "batteryLife": "12 months",
+      "color": "Gray",
+      "weight": "85g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Kate P.", "rating": 5, "comment": "Very ergonomic and works smoothly."},
+      {"user": "Roger F.", "rating": 4, "comment": "Good but a bit light."}
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Travel Duffel Bag",
+    "category": "Luggage",
+    "price": 69.99,
+    "rating": 4.4,
+    "description": "Durable travel duffel bag made with water-resistant fabric, featuring multiple compartments and adjustable shoulder strap.",
+    "shortDescription": "Water-resistant travel duffel bag.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1562843480-d0c5fa2e5f6d?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1562843480-d0c5fa2e5f6d?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1505740106531-4243f3831bba?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1581091870625-81a4abf3f216?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1562843480-d0c5fa2e5f6d?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "capacity": "45L",
+      "material": "Polyester",
+      "color": "Navy Blue",
+      "weight": "950g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Liam N.", "rating": 5, "comment": "Perfect size for weekend trips."},
+      {"user": "Emma Q.", "rating": 4, "comment": "Good bag but strap could be wider."}
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Ceramic Coffee Mug Set (Set of 4)",
+    "category": "Kitchen",
+    "price": 34.99,
+    "rating": 4.7,
+    "description": "Set of four ceramic coffee mugs with a matte finish. Holds up to 350ml, sturdy and stylish.",
+    "shortDescription": "Four‑piece ceramic mug set.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1523986371872-9d3ba2e2fba4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Ceramic",
+      "capacity": "350ml each",
+      "color": "Assorted Pastel",
+      "weight": "450g per mug"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Nora F.", "rating": 5, "comment": "Love the pastel colors, perfect for my kitchen."},
+      {"user": "Gabe L.", "rating": 4, "comment": "Very good quality, but a little heavy."}
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Adjustable Yoga Mat",
+    "category": "Sports",
+    "price": 29.99,
+    "rating": 4.5,
+    "description": "Eco-friendly yoga mat with adjustable carry strap. Non-slip surface and medium thickness for comfort.",
+    "shortDescription": "Eco non-slip yoga mat with strap.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1605296867304-46d5465a13f5?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1605296867304-46d5465a13f5?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1594737625785-1d1b2b3abc9f?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1605296867304-46d5465a13f5?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "length": "183cm",
+      "width": "61cm",
+      "thickness": "4mm",
+      "weight": "1.2kg"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Yogi B.", "rating": 5, "comment": "Great grip and very durable."},
+      {"user": "Mia T.", "rating": 4, "comment": "Comfortable but slightly heavy."}
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Luxury Sunglasses",
+    "category": "Fashion",
+    "price": 79.99,
+    "rating": 4.8,
+    "description": "Polarized sunglasses with UV protection and metal frame. Stylish and reliable.",
+    "shortDescription": "Polarized UV‑protection sunglasses.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "lensMaterial": "Polycarbonate",
+      "frameMaterial": "Metal",
+      "polarity": "Polarized",
+      "uvProtection": "UV400"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Cindy H.", "rating": 5, "comment": "Very classy and protects my eyes well."},
+      {"user": "Alex J.", "rating": 4, "comment": "Stylish but lens glare a bit."}
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Leather Backpack",
+    "category": "Luggage",
+    "price": 129.99,
+    "rating": 4.5,
+    "description": "Premium genuine leather backpack with multiple compartments, padded laptop sleeve, and elegant finish.",
+    "shortDescription": "Genuine leather backpack.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1495121605193-b116b5b9c3f4?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1495121605193-b116b5b9c3f4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1562843480-d0c5fa2e5f6d?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1581091870625-81a4abf3f216?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1495121605193-b116b5b9c3f4?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "capacity": "20L",
+      "material": "Leather",
+      "color": "Dark Brown",
+      "weight": "1.4kg"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Peter S.", "rating": 5, "comment": "Very sturdy and stylish."},
+      {"user": "Maya V.", "rating": 4, "comment": "Love the look, but it's a bit heavy when empty."}
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Women’s Crossbody Bag",
+    "category": "Fashion",
+    "price": 59.99,
+    "rating": 4.4,
+    "description": "Compact crossbody bag made from vegan leather. Lightweight and perfect for day-to-day essentials.",
+    "shortDescription": "Vegan leather crossbody bag.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1511385348-a52f3304e6a2?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1511385348-a52f3304e6a2?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1516939884455-1443479fab79?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1511385348-a52f3304e6a2?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Vegan Leather",
+      "dimensions": "22cm x 15cm x 8cm",
+      "color": "Beige",
+      "weight": "420g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Lily R.", "rating": 5, "comment": "Perfect for quick errands."},
+      {"user": "Noah K.", "rating": 4, "comment": "Stylish but strap is short."}
+    ]
+  },
+  {
+    "id": "23",
+    "name": "USB-C Power Bank 20000mAh",
+    "category": "Electronics",
+    "price": 39.99,
+    "rating": 4.3,
+    "description": "High-capacity 20000mAh USB-C power bank with dual output and fast charging support.",
+    "shortDescription": "Large 20000mAh USB-C power bank.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1584291527908-2b6c68f312ec?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1584291527908-2b6c68f312ec?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1579391146226-3e2f0340d0f4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1585222515068-720a1604c38e?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1584291527908-2b6c68f312ec?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "capacity": "20000mAh",
+      "input": "USB-C 5V/2A",
+      "output": "USB-C & USB-A 5V/3A",
+      "weight": "450g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Evan J.", "rating": 5, "comment": "Charges my phone multiple times."},
+      {"user": "Sandra Q.", "rating": 4, "comment": "Quite big but worth the capacity."}
+    ]
+  },
+  {
+    "id": "24",
+    "name": "Bluetooth Smart Scale",
+    "category": "Health & Fitness",
+    "price": 24.99,
+    "rating": 4.2,
+    "description": "Smart body scale that connects via Bluetooth to track weight, BMI, and body fat over time.",
+    "shortDescription": "Bluetooth-connected smart body scale.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1580743688679-7788e239e8f7?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1580743688679-7788e239e8f7?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1581338837927-8d58f90f4a12?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1580743688679-7788e239e8f7?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "maxWeight": "180kg",
+      "accuracy": "50g",
+      "connectivity": "Bluetooth",
+      "color": "White"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Grace Y.", "rating": 5, "comment": "Helps me track my progress accurately."},
+      {"user": "Marcus T.", "rating": 4, "comment": "Good, but the readings vary a little."}
+    ]
+  },
+  {
+    "id": "25",
+    "name": "Classic Leather Belt",
+    "category": "Accessories",
+    "price": 19.99,
+    "rating": 4.1,
+    "description": "Durable full-grain leather belt with classic buckle. A timeless accessory for any wardrobe.",
+    "shortDescription": "Full-grain leather belt.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1618083742277-3b1c4c9491d5?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1618083742277-3b1c4c9491d5?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1586083866061-c56655e6b3e7?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1592503256265-0e368cd0db0d?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1618083742277-3b1c4c9491d5?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Leather",
+      "length": "120cm",
+      "color": "Brown",
+      "width": "3.5cm"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Henry W.", "rating": 5, "comment": "Very sturdy and stylish."},
+      {"user": "Laura S.", "rating": 3, "comment": "Good belt but leather feels stiff."}
+    ]
+  },
+  {
+    "id": "26",
+    "name": "Ceramic Bowl Set (4 pcs)",
+    "category": "Kitchen",
+    "price": 29.99,
+    "rating": 4.4,
+    "description": "Set of four ceramic bowls for serving salads, soups or cereals. Microwave and dishwasher safe.",
+    "shortDescription": "4-piece ceramic bowl set.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1587300007209-d0efb60da19e?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1587300010656-93002f4bb0e5?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Ceramic",
+      "capacityEach": "600ml",
+      "color": "White",
+      "weightEach": "350g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Diana P.", "rating": 5, "comment": "Perfect size for my breakfast cereal."},
+      {"user": "Rick N.", "rating": 4, "comment": "Nice bowls but they chip easily if dropped."}
+    ]
+  },
+  {
+    "id": "27",
+    "name": "Portable Projector",
+    "category": "Electronics",
+    "price": 149.99,
+    "rating": 4.3,
+    "description": "Compact HD portable projector with HDMI and USB input, ideal for movie nights or presentations.",
+    "shortDescription": "Mini HD portable projector.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1584270354949-1c06a5b95a31?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1584270354949-1c06a5b95a31?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1587739077839-5946fda71b1c?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1534422298391-e839bdceacb4?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1584270354949-1c06a5b95a31?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "resolution": "720p",
+      "connectivity": "HDMI / USB",
+      "brightness": "2000 lumens",
+      "color": "White"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "James F.", "rating": 5, "comment": "Perfect for small movie nights."},
+      {"user": "Sara T.", "rating": 4, "comment": "Good value, but not super bright."}
+    ]
+  },
+  {
+    "id": "28",
+    "name": "Classic Aviator Sunglasses",
+    "category": "Fashion",
+    "price": 69.99,
+    "rating": 4.7,
+    "description": "Timeless aviator sunglasses with polarized lenses and durable metal frame.",
+    "shortDescription": "Polarized aviator sunglasses.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "lensMaterial": "Polycarbonate",
+      "frameMaterial": "Metal",
+      "polarized": "Yes",
+      "uvProtection": "UV400"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Carla H.", "rating": 5, "comment": "Classy and very protective."},
+      {"user": "Peter W.", "rating": 4, "comment": "Stylish but little heavy."}
+    ]
+  },
+  {
+    "id": "29",
+    "name": "Portable Blender",
+    "category": "Kitchen",
+    "price": 34.99,
+    "rating": 4.2,
+    "description": "USB rechargeable portable blender for smoothies on the go. Easy to use and clean.",
+    "shortDescription": "USB‑rechargeable portable blender.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1601042055080-5f8f1a47ecfc?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1601042055080-5f8f1a47ecfc?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1587574293340-4f5aede23faa?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1601042055080-5f8f1a47ecfc?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "capacity": "300ml",
+      "powerSource": "USB",
+      "color": "Pink",
+      "weight": "520g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Zoe K.", "rating": 5, "comment": "Blend smoothies anywhere. Very handy."},
+      {"user": "Adam L.", "rating": 4, "comment": "Good but small capacity."}
+    ]
+  },
+  {
+    "id": "30",
+    "name": "Soft Throw Blanket",
+    "category": "Home Decor",
+    "price": 44.99,
+    "rating": 4.6,
+    "description": "Luxuriously soft throw blanket made of microfiber fleece. Perfect for cozy nights on the sofa.",
+    "shortDescription": "Microfiber fleece throw blanket.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1580428180173-bb6df9add6d4?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1580428180173-bb6df9add6d4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1598300056399-4b8cd273a7a9?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1580428180173-bb6df9add6d4?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Microfiber fleece",
+      "size": "130cm × 160cm",
+      "color": "Gray",
+      "weight": "750g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Dana M.", "rating": 5, "comment": "So soft and warm, love it."},
+      {"user": "Evan S.", "rating": 4, "comment": "Great blanket, but a little big for my couch."}
+    ]
+  },
+  {
+    "id": "31",
+    "name": "Children’s Wooden Toy Car",
+    "category": "Toys",
+    "price": 24.99,
+    "rating": 4.3,
+    "description": "Classic wooden toy car made from sustainable wood. Safe, smooth edges and great for imaginative play.",
+    "shortDescription": "Eco wooden toy car.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1583496661160-fb182a6a635a?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1583496661160-fb182a6a635a?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1528279145568-b6e9e473a669?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1594737625785-1d1b2b3abc9f?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1583496661160-fb182a6a635a?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Wood",
+      "length": "12cm",
+      "color": "Natural Wood",
+      "weight": "180g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Lily A.", "rating": 5, "comment": "My son loves pushing it around!"},
+      {"user": "Mark B.", "rating": 4, "comment": "Well-made, but a bit small."}
+    ]
+  },
+  {
+    "id": "32",
+    "name": "Makeup Brush Set (10 pcs)",
+    "category": "Beauty",
+    "price": 29.99,
+    "rating": 4.4,
+    "description": "Complete makeup brush set for face and eyes, with soft synthetic bristles and a carrying case.",
+    "shortDescription": "10‑piece synthetic makeup brush set.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1526045478516-99145907023c?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1526045478516-99145907023c?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1580229072419-c27d895b102e?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1594737625785-1d1b2b3abc9f?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1526045478516-99145907023c?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "brushCount": 10,
+      "bristleMaterial": "Synthetic",
+      "handleMaterial": "Wood",
+      "color": "Black & Rose Gold"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Mia W.", "rating": 5, "comment": "Extremely soft brushes and good coverage."},
+      {"user": "Gina R.", "rating": 4, "comment": "Nice set but case feels a bit cheap."}
+    ]
+  },
+  {
+    "id": "33",
+    "name": "Electric Steam Iron",
+    "category": "Home Appliances",
+    "price": 39.99,
+    "rating": 4.3,
+    "description": "Powerful steam iron with adjustable temperature, water tank, and self-cleaning function.",
+    "shortDescription": "Steam iron with adjustable temp.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1616627981668-78e4005b1eb8?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1616627981668-78e4005b1eb8?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1581091870625-81a4abf3f216?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1585222515068-720a1604c38e?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1616627981668-78e4005b1eb8?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "steamOutput": "30g/min",
+      "tankCapacity": "300ml",
+      "color": "White/Blue",
+      "weight": "1.2kg"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Julia W.", "rating": 5, "comment": "Heats up quickly and steams well."},
+      {"user": "Nathan B.", "rating": 4, "comment": "Good iron but a little heavy to use."}
+    ]
+  },
+  {
+    "id": "34",
+    "name": "Adjustable Laptop Stand",
+    "category": "Office",
+    "price": 27.99,
+    "rating": 4.5,
+    "description": "Ergonomic laptop stand with adjustable height & angle. Helps improve posture and reduce neck strain.",
+    "shortDescription": "Adjustable ergonomic laptop stand.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1580229072419-c27d895b102e?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1581349485608-5e01448b2f1a?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Aluminum",
+      "heightMin": "10cm",
+      "heightMax": "20cm",
+      "color": "Silver",
+      "weight": "600g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Olivia P.", "rating": 5, "comment": "Really helps me work ergonomically."},
+      {"user": "Jacob H.", "rating": 4, "comment": "Stable but a bit bulky."}
+    ]
+  },
+  {
+    "id": "35",
+    "name": "Wireless Earbuds with Charging Case",
+    "category": "Electronics",
+    "price": 59.99,
+    "rating": 4.4,
+    "description": "True wireless earbuds with charging case, 20-hour total battery, and touch controls.",
+    "shortDescription": "True wireless earbuds with case.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1585386959984-a4155228f0d1?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1585386959984-a4155228f0d1?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1584960744801-0ca7a41c0bda?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1585386959984-a4155228f0d1?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "batteryLife": "5h / 20h with case",
+      "connectivity": "Bluetooth 5.0",
+      "color": "White",
+      "weight": "50g (with case)"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Emma G.", "rating": 5, "comment": "Sound is great and case lasts long."},
+      {"user": "Liam T.", "rating": 4, "comment": "Very nice, but earbuds fall out a bit."}
+    ]
+  },
+  {
+    "id": "36",
+    "name": "Modern Wall Clock",
+    "category": "Home Decor",
+    "price": 34.99,
+    "rating": 4.3,
+    "description": "Minimalist wall clock with silent sweep movement, perfect for living rooms, offices, or bedrooms.",
+    "shortDescription": "Minimalist silent wall clock.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1592331031295-89e3bd5e4670?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1592331031295-89e3bd5e4670?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1592331031295-89e3bd5e4670?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "diameter": "30cm",
+      "movement": "Quartz",
+      "color": "Black & Gold",
+      "material": "Metal & Glass"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Veronica B.", "rating": 5, "comment": "Elegant and quiet."},
+      {"user": "Jake S.", "rating": 4, "comment": "Looks great, but frame is a bit thin."}
+    ]
+  },
+  {
+    "id": "37",
+    "name": "Microfiber Yoga Towel",
+    "category": "Sports",
+    "price": 19.99,
+    "rating": 4.2,
+    "description": "Highly absorbent microfiber yoga towel with non-slip backing, ideal for hot yoga or gym.",
+    "shortDescription": "Microfiber yoga towel with grip.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1587595436219-ddc43cb1e096?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "size": "172cm × 62cm",
+      "material": "Microfiber",
+      "color": "Teal",
+      "weight": "350g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Jenna P.", "rating": 5, "comment": "Great absorption and doesn’t slip."},
+      {"user": "Marcus V.", "rating": 4, "comment": "Nice towel, but a little small for me."}
+    ]
+  },
+  {
+    "id": "38",
+    "name": "Decorative Framed Wall Art",
+    "category": "Home Decor",
+    "price": 44.99,
+    "rating": 4.6,
+    "description": "Stylish framed wall art print featuring modern abstract design. Ready to hang and elevates any space.",
+    "shortDescription": "Abstract framed wall art print.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b1?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "dimensions": "40cm × 60cm",
+      "frameMaterial": "Wood",
+      "printMaterial": "Canvas",
+      "color": "Multicolor"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Nadia Z.", "rating": 5, "comment": "Beautiful art, really lifts up my wall."},
+      {"user": "Peter L.", "rating": 4, "comment": "Great, but could use more color variety."}
+    ]
+  },
+  {
+    "id": "39",
+    "name": "19\" Portable Monitor",
+    "category": "Electronics",
+    "price": 129.99,
+    "rating": 4.3,
+    "description": "Slim 19‑inch portable monitor with USB-C and HDMI support. Perfect for travel and dual-screen productivity.",
+    "shortDescription": "Portable USB‑C / HDMI monitor 19″.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1526378721318-3e13a4d13e57?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1580229072419-c27d895b102e?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "screenSize": "19″",
+      "resolution": "1080p",
+      "connectivity": "USB-C, HDMI",
+      "weight": "900g"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Grace F.", "rating": 5, "comment": "Super useful for remote work."},
+      {"user": "Omar I.", "rating": 4, "comment": "Good monitor but brightness is moderate."}
+    ]
+  },
+  {
+    "id": "40",
+    "name": "LED Desk Lamp with Wireless Charger",
+    "category": "Office & Stationery",
+    "price": 59.99,
+    "rating": 4.7,
+    "description": "Modern LED desk lamp with adjustable brightness, color temperature, and a built-in wireless charger at its base.",
+    "shortDescription": "LED lamp with Qi wireless charger.",
+    "images": {
+      "thumbnail": "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=500&auto=format&fit=crop&q=60",
+      "gallery": [
+        "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1498654208195-2e04a960112d?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=800&auto=format&fit=crop&q=60"
+      ],
+      "detailImage": "https://images.unsplash.com/photo-1505685296765-3a2736de412f?w=1000&auto=format&fit=crop&q=60"
+    },
+    "specifications": {
+      "material": "Aluminum",
+      "brightnessLevels": 5,
+      "colorTemperature": "3000K-6000K",
+      "chargerOutput": "10W"
+    },
+    "availability": "In Stock",
+    "reviews": [
+      {"user": "Julian N.", "rating": 5, "comment": "Lamp works great and charger is super handy."},
+      {"user": "Ella V.", "rating": 4, "comment": "Very functional but a little pricey."}
+    ]
+  }
+]
