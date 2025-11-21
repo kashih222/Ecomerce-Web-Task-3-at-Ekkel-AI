@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema(
     fullname: {
       type: String,
       required: true,
-      trim: true,
       match: [/^[a-zA-Z0-9 ]+$/, "Only letters and numbers allowed"],
     },
     email: {
@@ -15,13 +14,26 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      match: [/^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email"],
+      match: [
+        /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        "Invalid email",
+      ],
     },
     password: {
       type: String,
       required: true,
       minlength: 6,
       maxlength: 20,
+      match: [
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+        "Password must contain 1 uppercase, 1 lowercase, 1 number & 1 special character",
+      ],
+    },
+
+    role: {
+      type: String,
+      enum: ["customer", "admin"],
+      default: "customer",
     },
   },
   { timestamps: true }

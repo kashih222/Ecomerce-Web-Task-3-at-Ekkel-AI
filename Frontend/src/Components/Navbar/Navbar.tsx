@@ -144,7 +144,7 @@ const Navbar = () => {
                 onClick={() => setOpenProfile(!openProfile)}
               >
                 {user?.fullname.charAt(0).toUpperCase()}
-              </div>
+              </div>             
               {openProfile && (
                 <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg p-2 w-36 text-sm">
                   <button

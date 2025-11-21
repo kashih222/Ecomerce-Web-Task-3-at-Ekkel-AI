@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const authRoutes = require("./Routes/authRoutes");
+const productRoutes = require("./Routes/productRoutes")
 
 dotenv.config();
 
@@ -17,9 +18,16 @@ app.get("/", (req, res) => {
   res.send("Backend is running...");
 });
 
-// Register API
+// User API
 app.use("/api/auth", authRoutes);
 app.use("/api/login", authRoutes);
+
+// Product API
+app.use("/api/product", productRoutes);
+app.use("/api/fetch", productRoutes);
+app.use("/api/delete", productRoutes);
+app.use("/api/update", productRoutes);
+app.use("/api/single-product", productRoutes);
 
 
 
