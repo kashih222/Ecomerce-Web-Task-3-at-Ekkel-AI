@@ -98,6 +98,18 @@ router.get("/product/:id", async (req, res) => {
 });
 
 
+// GET UNIQUE CATEGORIES
+router.get("/categories", async (req, res) => {
+  try {
+    const categories = await Product.distinct("category");
+
+    res.status(200).json({ categories });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch categories", error });
+  }
+});
+
+
 
 
 

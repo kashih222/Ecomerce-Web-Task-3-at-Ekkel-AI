@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/Logo.png";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const API_REGISTER = "http://localhost:5000/api/auth/registeruser";
-const API_LOGIN = "http://localhost:5000/api/auth/login";
+const API_REGISTER = "http://localhost:5000/api/auth/user/registeruser";
+const API_LOGIN = "http://localhost:5000/api/login/login-me";
+const API_LOGOUT = "http://localhost:5000/api/auth/loging/logout";
+const API_USER = "http://localhost:5000/api/loged-me/me";
 
 type InputsLogin = {
   email: string;
@@ -24,14 +27,26 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [OpenLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
-
   const [user, setUser] = useState<{ fullname: string; email: string } | null>(
-    JSON.parse(localStorage.getItem("user") || "null")
+    null
   );
   const [openProfile, setOpenProfile] = useState(false);
 
   const delay = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
+
+  // Check logged-in user on mount
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(API_USER, { withCredentials: true });
+        setUser(response.data.user);
+      } catch {
+        setUser(null);
+      }
+    };
+    fetchUser();
+  }, []);
 
   // LOGIN FORM
   const {
@@ -52,53 +67,65 @@ const Navbar = () => {
   // LOGIN SUBMIT
   const onLoginSubmit: SubmitHandler<InputsLogin> = async (data) => {
     try {
-      const response = await axios.post(API_LOGIN, data);
+      const response = await axios.post(API_LOGIN, data, {
+        withCredentials: true,
+      });
       console.log("Login success:", response.data);
       setUser(response.data.user);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
 
-      alert(`Welcome, ${response.data.user.fullname}`);
+      toast.success(`Welcome, ${response.data.user.fullname}`);
       resetLogin();
       setOpenLogin(false);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        alert(
+        toast.error(
           error.response?.data?.message ||
             "Something went wrong. Please try again."
         );
       } else {
-        alert("Something went wrong. Please try again.");
+        toast.error("Something went wrong. Please try again.");
       }
     }
   };
 
   // SIGNUP SUBMIT
- const onSignupSubmit: SubmitHandler<InputsSignup> = async (data) => {
-  try {
-    await delay(2000); 
+  const onSignupSubmit: SubmitHandler<InputsSignup> = async (data) => {
+    try {
+      await delay(2000);
 
-    const response = await axios.post(API_REGISTER, {
-      fullname: data.fullname,
-      email: data.email,
-      password: data.password,
-    });
+      const response = await axios.post(API_REGISTER, data, {
+        withCredentials: true,
+      });
+      console.log("User Registered:", response.data);
 
-    console.log("User Registered:", response.data);
-
-    resetSignup(); 
-    setOpenSignup(false); 
-    alert("User Registered Successfully!");
-  } catch (error: unknown) {
-    if (axios.isAxiosError(error)) {
-      console.log(error.response?.data || error.message);
-      alert(error.response?.data?.message || "Something went wrong!");
-    } else {
-      console.log(error);
-      const message = error instanceof Error ? error.message : String(error);
-      alert(message || "Something went wrong!");
+      setUser(response.data.user);
+      resetSignup();
+      setOpenSignup(false);
+      toast.success("User Registered Successfully!");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        console.log(error.response?.data || error.message);
+        toast.error(error.response?.data?.message || "Something went wrong!");
+      } else {
+        console.log(error);
+        const message = error instanceof Error ? error.message : String(error);
+        toast.error(message || "Something went wrong!");
+      }
     }
-  }
-};
+  };
+
+  // LOGOUT
+  const handleLogout = async () => {
+    try {
+      await axios.post(API_LOGOUT, {}, { withCredentials: true });
+      setUser(null);
+      setOpenProfile(false);
+      setOpen(false);
+      toast.success("Logged out successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
@@ -139,24 +166,25 @@ const Navbar = () => {
         <div className="hidden md:flex gap-4">
           {user ? (
             <div className="relative">
-              <div
-                className="rounded-full w-14 h-14 border border-gray-300 cursor-pointer flex items-center justify-center bg-gray-900 text-white font-bold"
-                onClick={() => setOpenProfile(!openProfile)}
-              >
-                {user?.fullname.charAt(0).toUpperCase()}
-              </div>             
+              <div className="">
+                <div
+                  className="rounded-full w-14 h-14 border border-gray-300 cursor-pointer flex items-center justify-center bg-gray-900 text-white font-bold"
+                  onClick={() => setOpenProfile(!openProfile)}
+                >
+                  {user?.fullname.charAt(0).toUpperCase()}
+                </div>
+              </div>
               {openProfile && (
-                <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg p-2 w-36 text-sm">
+                <div className="absolute right-0 mt-2  shadow-lg rounded-lg p-2  text-sm ">
+                  <div >
+                    <p className="text-black font-bold px-2 py-1">{user.fullname}</p>
+                    <p className="px-2 py-1">{user.email}</p>
+                  </div>
                   <button
-                    onClick={() => {
-                      setUser(null);
-                      setOpenProfile(false);
-                      console.log(localStorage.clear())
-                    }}
-                    className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded"
+                    onClick={handleLogout}
+                    className="w-full text-left px-2 py-1 hover:bg-red-600 rounded hover:text-white font-medium"
                   >
-                    Logout
-
+                  Logout
                   </button>
                 </div>
               )}
@@ -222,25 +250,24 @@ const Navbar = () => {
               </div>
 
               {openProfile && (
-                <div className="absolute top-12 right-6 bg-white shadow-lg rounded-lg p-2 w-36 text-sm">
+                <div className="  mt-2  shadow-lg rounded-lg p-2  text-sm ">
+                  <div >
+                    <p className="text-black font-bold px-2 py-1">{user.fullname}</p>
+                    <p className="px-2 py-1">{user.email}</p>
+                  </div>
                   <button
-                    onClick={() => {
-                      setUser(null);
-                      localStorage.removeItem("user");
-                      setOpenProfile(false);
-                      setOpen(false);
-                      console.log(localStorage.clear())
-                    }}
-                    className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded"
+                    onClick={handleLogout}
+                    className="w-full text-left px-2 py-1 hover:bg-red-600 rounded hover:text-white font-medium"
                   >
-                    Logout
+                  Logout
                   </button>
                 </div>
               )}
             </div>
           ) : (
             <>
-              <button
+              <div className="flex items-center justify-center gap-2">
+                <button
                 className="px-5 py-2 border border-black text-black rounded-full hover:scale-90 hover:text-white duration-300"
                 onClick={() => setOpenLogin(true)}
               >
@@ -252,6 +279,7 @@ const Navbar = () => {
               >
                 Sign Up
               </button>
+              </div>
             </>
           )}
         </div>

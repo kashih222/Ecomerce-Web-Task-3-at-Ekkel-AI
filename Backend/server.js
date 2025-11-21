@@ -5,12 +5,23 @@ const dotenv = require("dotenv");
 const authRoutes = require("./Routes/authRoutes");
 const productRoutes = require("./Routes/productRoutes")
 
-dotenv.config();
+
 
 const app = express();
 
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET ; 
+console.log(JWT_SECRET)
+
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", 
+  credentials: true, 
+}));
 app.use(express.json());
 
 // Routes
@@ -19,8 +30,10 @@ app.get("/", (req, res) => {
 });
 
 // User API
-app.use("/api/auth", authRoutes);
+app.use("/api/auth/user", authRoutes);
 app.use("/api/login", authRoutes);
+app.use("/api/loged-me", authRoutes);
+app.use("/api/auth/loging", authRoutes);
 
 // Product API
 app.use("/api/product", productRoutes);
@@ -28,6 +41,7 @@ app.use("/api/fetch", productRoutes);
 app.use("/api/delete", productRoutes);
 app.use("/api/update", productRoutes);
 app.use("/api/single-product", productRoutes);
+app.use("/api/product-catagory", productRoutes);
 
 
 
@@ -42,3 +56,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
+

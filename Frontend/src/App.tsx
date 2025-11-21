@@ -6,13 +6,14 @@ import ContactPage from './Components/ContactPage/ContactPage'
 import CartPage from './Components/Cart Page/CartPage'
 import Navbar from './Components/Navbar/Navbar'
 import Footer from './Components/Footer/Footer'
+import Toast from './Components/Toaster/Toast'
 // import ErrorPage from './Components/ErrorPage/ErrorPage'
 
 const App = () => {
   return (
     <Router>
       <Navbar />
-      
+        <Toast/>
         <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/about" element={<AboutPage/>} />
