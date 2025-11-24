@@ -2,64 +2,51 @@ import { createContext, useState, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// Cart item type
 export type CartItem = {
   _id: string;
   productId: string;
   name: string;
   price: number;
-  quantity: number;
   images: { thumbnail: string };
+  quantity: number;
 };
 
-// Context type
 export type CartContextType = {
   cart: CartItem[];
   loadCart: () => Promise<void>;
   addToCart: (productId: string, quantity?: number) => Promise<void>;
-  updateQuantity: (id: string, action: "inc" | "dec") => Promise<void>;
-  removeItem: (id: string) => Promise<void>;
+  updateQuantity: (productId: string, action: "inc" | "dec") => Promise<void>;
+  removeItem: (productId: string) => Promise<void>;
 };
 
-// Create context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const FETCH_CART = "http://localhost:5000/api/cart/get-cart";
-  const ADD_TO_CART = "http://localhost:5000/api/cart/add-to-cart";
-  const UPDATE_QTY = "http://localhost:5000/api/cart/update-qty";
-  const REMOVE_ITEM = "http://localhost:5000/api/cart/remove-item";
-
   const token = localStorage.getItem("token") || "";
 
-  // Load Cart
   const loadCart = useCallback(async () => {
     try {
       if (!token) return;
-      const { data } = await axios.get(FETCH_CART, {
+      const { data } = await axios.get("http://localhost:5000/api/cart/get-cart", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setCart(Array.isArray(data.cartItems) ? data.cartItems : []);
+      setCart(data.cartItems || []);
     } catch (err) {
       console.error(err);
       toast.error("Failed to load cart");
     }
   }, [token]);
 
- 
-
-  // Add to Cart
   const addToCart = async (productId: string, quantity = 1) => {
     try {
       if (!token) return;
       const { data } = await axios.post(
-        ADD_TO_CART,
+        "http://localhost:5000/api/cart/add-to-cart",
         { productId, quantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
       setCart(data.cartItems || []);
       toast.success("Product added to cart");
     } catch (err) {
@@ -68,38 +55,45 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  // Update Quantity
-  const updateQuantity = async (id: string, action: "inc" | "dec") => {
+  const updateQuantity = async (productId: string, action: "inc" | "dec") => {
     try {
-      const { data } = await axios.put(
-        UPDATE_QTY,
-        { id, action },
+      if (!token) return;
+      const item = cart.find((cartItem) => cartItem.productId === productId);
+      if (!item) return;
+
+      const nextQuantity = action === "inc" ? item.quantity + 1 : item.quantity - 1;
+      if (nextQuantity < 1 || nextQuantity === item.quantity) return;
+
+      const { data } = await axios.post(
+        "http://localhost:5000/api/cart/update-qty",
+        { productId, quantity: nextQuantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setCart(data.cartItems || []);
-      toast.success("Cart Updated");
-    } catch {
+      toast.success("Cart updated");
+    } catch (err) {
+      console.error(err);
       toast.error("Failed to update quantity");
     }
   };
 
-  // Remove Item
-  const removeItem = async (id: string) => {
+  const removeItem = async (productId: string) => {
     try {
-      const { data } = await axios.delete(`${REMOVE_ITEM}/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/cart/remove-item",
+        { productId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
       setCart(data.cartItems || []);
       toast.success("Item removed");
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error("Failed to remove item");
     }
   };
 
   return (
-    <CartContext.Provider
-      value={{ cart, loadCart, addToCart, updateQuantity, removeItem }}
-    >
+    <CartContext.Provider value={{ cart, loadCart, addToCart, updateQuantity, removeItem }}>
       {children}
     </CartContext.Provider>
   );
