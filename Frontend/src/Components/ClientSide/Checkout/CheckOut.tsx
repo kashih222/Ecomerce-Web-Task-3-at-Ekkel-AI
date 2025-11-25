@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from "react";
-import CartContext, { type CartContextType } from "../../context/CartContext";
+import CartContext, { type CartContextType } from "../../../context/CartContext";
 
 const CheckOut: React.FC = () => {
   const [loading, setLoading] = useState(false);

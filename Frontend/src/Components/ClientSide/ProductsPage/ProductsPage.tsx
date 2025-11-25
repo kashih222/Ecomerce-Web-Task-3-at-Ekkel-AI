@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import CartContext from "../../context/CartContext";
+import CartContext from "../../../context/CartContext";
 
 
 

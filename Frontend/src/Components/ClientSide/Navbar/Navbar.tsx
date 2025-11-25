@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import logo from "../../assets/Logo.png";
+import logo from "../../../assets/Logo.png";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
-import cartpng from "../../assets/shopping-cart.gif";
-import  CartContext from "../../context/CartContext";
+import cartpng from "../../../assets/shopping-cart.gif";
+import  CartContext from "../../../context/CartContext";
 
 
 const API_REGISTER = "http://localhost:5000/api/auth/user/registeruser";
