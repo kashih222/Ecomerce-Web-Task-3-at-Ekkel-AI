@@ -2,6 +2,7 @@ import { createContext, useState, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
 export type CartItem = {
   _id: string;
   productId: string;

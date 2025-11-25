@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import CartContext from "../../context/CartContext";
+import { NavLink } from "react-router-dom";
 
 const CartPage = () => {
   const { cart, loadCart, updateQuantity, removeItem } = useContext(CartContext)!;
@@ -91,9 +92,11 @@ const CartPage = () => {
                 <span>Total Price:</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
-              <button className="w-full py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition text-lg font-semibold">
+              <NavLink to="/cart/check-out">
+                <button className="w-full py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition text-lg font-semibold">
                 Proceed to Checkout
               </button>
+              </NavLink>
             </div>
           </div>
         )}

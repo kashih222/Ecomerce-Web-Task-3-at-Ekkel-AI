@@ -9,6 +9,7 @@ import Footer from "./Components/Footer/Footer";
 import Toast from "./Components/Toaster/Toast";
 import CartContext from "./context/CartContext";
 import { useEffect, useContext } from "react";
+import CheckOut from "./Components/Checkout/CheckOut";
 
 const App = () => {
   const cartContext = useContext(CartContext);
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart/check-out" element={<CheckOut />} />
       </Routes>
       <Footer />
     </Router>
