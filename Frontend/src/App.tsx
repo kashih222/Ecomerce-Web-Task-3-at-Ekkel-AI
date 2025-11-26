@@ -5,10 +5,12 @@ import DashboardHome from "./Components/AdminSide/DashboardHome/DashboardHome";
 import AddProductPage from "./Components/AdminSide/AddProduct/AddProductPage";
 import AdminProductsPage from "./Components/AdminSide/Products/AdminProductsPage ";
 import AdminUsersPage from "./Components/AdminSide/UsersPage/AdminUsersPage";
+import Toast from "./Components/ClientSide/Toaster/Toast";
 
 const App = () => {
   return (
     <Router>
+      <Toast/>
       <Routes>
         {/* User Routes */}
         <Route path="/*" element={<UserPanelLayout />} />
@@ -21,7 +23,6 @@ const App = () => {
           <Route path="users" element={<AdminUsersPage />} />
         </Route>
 
-        {/* Redirect unknown paths */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

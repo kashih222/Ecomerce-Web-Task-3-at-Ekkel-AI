@@ -18,9 +18,7 @@ const AdminHeader: React.FC<SidebarProps> = ({ toggleSidebar }) => {
   const [user, setUser] = useState<LoggedUser | null>(null);
   const navigate = useNavigate();
 
-  // Fetch logged-in user info
   useEffect(() => {
-  // Define async function inside useEffect
   const fetchLoggedInUser = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/loged-me/me", { withCredentials: true });
@@ -31,7 +29,6 @@ const AdminHeader: React.FC<SidebarProps> = ({ toggleSidebar }) => {
     }
   };
 
-  // Immediately invoke the async function
   fetchLoggedInUser();
 }, []);
 

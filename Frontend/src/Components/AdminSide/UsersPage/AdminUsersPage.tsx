@@ -42,7 +42,6 @@ const AdminUsersPage = () => {
     fetchUsers();
   }, []);
 
-  // Open delete confirmation modal
   const confirmDeleteUser = (id: string) => {
     setSelectedUserId(id);
     setIsDeleteModalOpen(true);
@@ -95,7 +94,7 @@ const AdminUsersPage = () => {
   if (loading) return <p className="text-center p-5">Loading users...</p>;
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <h2 className="text-2xl font-bold mb-4">All Users</h2>
 
       <div className="overflow-x-auto bg-white shadow rounded-lg">

@@ -1,32 +1,30 @@
 @import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Chango&family=Delius+Swash+Caps&family=Major+Mono+Display&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Chango&family=Delius+Swash+Caps&family=Major+Mono+Display&display=swap");
 
-@import 'swiper/css';
-@import 'swiper/css/navigation';
-@import 'swiper/css/pagination';
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 :root {
   --swiper-theme-color: #007aff;
 }
 
-
 .input {
   @apply w-full p-3 border rounded focus:ring focus:outline-none;
 }
-
 
 body {
   margin: 0;
   padding: 0;
 }
 
-.delius{
+.delius {
   font-family: "Delius Swash Caps", cursive;
   font-weight: 400;
   font-style: normal;
 }
-.major-mono{
+.major-mono {
   font-family: "Major Mono Display", monospace;
   font-weight: 400;
   font-style: normal;

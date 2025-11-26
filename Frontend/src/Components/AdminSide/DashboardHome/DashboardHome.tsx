@@ -1,14 +1,16 @@
 import { ChartBar, Users, ShoppingCart, DollarSign } from "lucide-react";
+import CategoryBarChart from "../Charts/CategoryBarChart";
+import MarkOptimizationChart from "../Charts/MarkOptimizationChart";
 
 const DashboardHome = () => {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className=" bg-gray-100 min-h-screen w-full">
       {/* Page Title */}
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Dashboard</h1>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        <div className="bg-white p-5 rounded-lg shadow flex items-center gap-4">
+        <div className="bg-white p-5 rounded-lg shadow flex items-center  gap-4">
           <div className="p-3 bg-blue-100 rounded-full">
             <Users className="text-blue-600" />
           </div>
@@ -49,10 +51,10 @@ const DashboardHome = () => {
       {/* Charts / Graph Placeholder */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div className="bg-white p-5 rounded-lg shadow min-h-[300px] flex items-center justify-center">
-          <p className="text-gray-400">[Chart / Graph Placeholder]</p>
+          <p className="text-gray-400"><CategoryBarChart/></p>
         </div>
         <div className="bg-white p-5 rounded-lg shadow min-h-[300px] flex items-center justify-center">
-          <p className="text-gray-400">[Chart / Graph Placeholder]</p>
+          <p className="text-gray-400"><MarkOptimizationChart/></p>
         </div>
       </div>
 

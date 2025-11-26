@@ -13,7 +13,6 @@ const AboutPage = () => {
         </p>
       </div>
 
-      {/* About Content Section */}
       <div className="container mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-12 ">
         {/* Image */}
         <div className="md:w-1/2">
