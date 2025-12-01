@@ -6,6 +6,8 @@ import AddProductPage from "./Components/AdminSide/AddProduct/AddProductPage";
 import AdminProductsPage from "./Components/AdminSide/Products/AdminProductsPage ";
 import AdminUsersPage from "./Components/AdminSide/UsersPage/AdminUsersPage";
 import Toast from "./Components/ClientSide/Toaster/Toast";
+import AdminContactMessages from "./Components/AdminSide/ContactMessage/AdminContactMessages";
+import AdminOrders from "./Components/AdminSide/Orders/AdminOrders";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="add-product" element={<AddProductPage />} />
           <Route path="products" element={<AdminProductsPage />} />
           <Route path="users" element={<AdminUsersPage />} />
+          <Route path="client/messages" element={<AdminContactMessages />} />
+          <Route path="orders" element={<AdminOrders />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />

@@ -6,6 +6,9 @@ const authRoutes = require("./Routes/authRoutes");
 const productRoutes = require("./Routes/productRoutes")
 const cartRoutes = require ("./Routes/cartRoutes");
 const authMiddleware = require ("./Middlewares/authMiddleware")
+const contactRoutes = require("./Routes/contactRoutes");
+const orderRoutes = require ("./Routes/orderRoutes");
+
 
 
 const app = express();
@@ -25,10 +28,12 @@ app.use(cors({
 }));
 app.use(express.json());
 
+
 // Routes
 app.get("/", (req, res) => {
   res.send("Backend is running...");
 });
+
 
 // User API
 app.use("/api/auth/user", authRoutes);
@@ -49,6 +54,13 @@ app.use("/api/product-catagory", productRoutes);
 
 // Cart API
 app.use("/api/cart", authMiddleware, cartRoutes);
+
+// Order API
+app.use("/api/order", orderRoutes);
+
+// ContactUs API
+app.use("/api/contact", contactRoutes);
+
 
 
 // MongoDB connection

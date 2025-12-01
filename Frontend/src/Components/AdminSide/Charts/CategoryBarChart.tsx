@@ -35,7 +35,7 @@ export default function CategoryBarChart() {
   ];
 
   return (
-    <Box sx={{ p: 3, maxWidth: 900, mx: "auto" }}>
+    <Box sx={{ p: 3, maxWidth: 900, mx: "auto",overflowX: 'auto' }}>
       <Typography variant="h5" gutterBottom>
         <p className="text-black">Store Item Categories – Items per Category</p>
       </Typography>
@@ -54,14 +54,7 @@ export default function CategoryBarChart() {
         xAxis={[{ dataKey: "category" }]}
         series={series}
         {...chartSettings}
-        barHighlightMode="item"
-        slotProps={{
-          barHighlight: {
-            style: {
-              fill: "#ff7043",
-            },
-          },
-        }}
+       
       />
     </Box>
   );

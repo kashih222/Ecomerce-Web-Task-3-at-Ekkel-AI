@@ -69,7 +69,6 @@ const ContactPage = () => {
         <div className="conatiner h-2 w-full bg-black mt-20 md:mt-30 lg:mt-60"></div>
         <div className="py-20 ">
           <form className="w-full max-w-xl mx-auto bg-gray-100 p-8 rounded-2xl shadow-xl text-black space-y-6 ">
-            {/* Full Name */}
             <div>
               <label className="font-semibold text-lg">Full Name</label>
               <input
@@ -80,7 +79,6 @@ const ContactPage = () => {
               />
             </div>
 
-            {/* Email */}
             <div>
               <label className="font-semibold text-lg">Email Address</label>
               <input
@@ -91,7 +89,6 @@ const ContactPage = () => {
               />
             </div>
 
-            {/* Subject */}
             <div>
               <label className="font-semibold text-lg">Subject</label>
               <input
@@ -102,7 +99,6 @@ const ContactPage = () => {
               />
             </div>
 
-            {/* Message */}
             <div>
               <label className="font-semibold text-lg">Message</label>
               <textarea
@@ -113,7 +109,6 @@ const ContactPage = () => {
               ></textarea>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full py-3 bg-black text-white text-lg rounded-lg 

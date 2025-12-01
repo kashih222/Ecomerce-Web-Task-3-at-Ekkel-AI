@@ -6,6 +6,8 @@ import {
   Settings,
   LogOut,
   PlusCircle,
+  MessageSquareDot,
+  Truck,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -51,7 +53,7 @@ const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
           to="/dashboard/users"
           className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
         >
-          <Users size={20} />
+          <Users size={22} />
           {sidebarOpen && <span>Users</span>}
         </NavLink>
 
@@ -59,7 +61,7 @@ const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
           to="/dashboard/add-product"
           className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
         >
-          <PlusCircle size={20} />
+          <PlusCircle size={22} />
           {sidebarOpen && <span>Add Product</span>}
         </NavLink>
 
@@ -67,15 +69,31 @@ const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
           to="/dashboard/products"
           className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
         >
-          <Package size={20} />
+          <Package size={25} />
           {sidebarOpen && <span>Products</span>}
+        </NavLink>
+
+        <NavLink
+          to="/dashboard/orders"
+          className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
+        >
+          <Truck size={25} />
+          {sidebarOpen && <span>Orders</span>}
+        </NavLink>
+
+         <NavLink
+          to="/dashboard/client/messages"
+          className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
+        >
+          <MessageSquareDot  size={20} />
+          {sidebarOpen && <span>Client Messages</span>}
         </NavLink>
 
         <a
           href="#"
           className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
         >
-          <Settings size={20} />
+          <Settings size={23} />
           {sidebarOpen && <span>Settings</span>}
         </a>
 

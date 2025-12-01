@@ -202,7 +202,10 @@ const ProductPage = () => {
                   onClick={async () => {
                     await addToCart(product._id, 1); 
                     await loadCart(); 
-                  }}
+                    console.log("add to cart button clicked ")
+                  }
+                
+                }
                 >
                   Add to Cart
                 </button>
