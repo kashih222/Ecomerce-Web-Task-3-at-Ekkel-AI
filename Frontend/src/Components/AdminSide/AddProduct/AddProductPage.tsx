@@ -47,7 +47,6 @@ const AddProductPage = () => {
     availability: "In Stock",
   });
 
-  // Handle basic input change
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
@@ -59,7 +58,6 @@ const AddProductPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle images
   const handleImageChange = (
     e: ChangeEvent<HTMLInputElement>,
     index?: number
@@ -82,7 +80,6 @@ const AddProductPage = () => {
     }
   };
 
-  // Add more gallery fields
   const addGalleryField = () => {
     setFormData({
       ...formData,
@@ -93,7 +90,6 @@ const AddProductPage = () => {
     });
   };
 
-  // Specifications
   const handleSpecChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 

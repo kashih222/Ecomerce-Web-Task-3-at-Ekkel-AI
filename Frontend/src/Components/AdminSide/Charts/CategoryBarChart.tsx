@@ -14,7 +14,6 @@ export default function CategoryBarChart() {
     items: c.count,
   }));
 
-  // Get index of top category
   const topIndex = dataset.findIndex(
     (row) => row.category === topCategory.name
   );

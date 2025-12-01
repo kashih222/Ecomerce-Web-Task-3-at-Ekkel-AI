@@ -57,7 +57,6 @@ const ContactPage = () => {
       <div className="container min-h-screen w-full flex items-center justify-center px-4">
         <div className="container mx-auto">
           
-          {/* UI SAME AS BEFORE — NOT MODIFIED */}
           
           <div className="py-20">
             <form
