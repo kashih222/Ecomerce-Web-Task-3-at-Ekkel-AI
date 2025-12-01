@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -38,6 +37,7 @@ const AdminContactMessages: React.FC = () => {
         const { data } = await axios.get<ApiAllMessagesResponse>(`${API_BASE}/all-messages`);
         setMessages(data.messages);
       } catch (error) {
+        console.log(error)
         toast.error("Failed to fetch messages");
       } finally {
         setLoading(false);
@@ -54,6 +54,7 @@ const AdminContactMessages: React.FC = () => {
       setSelectedMessage(data.message);
       setModalOpen(true);
     } catch (error) {
+      console.log(error)
       toast.error("Error fetching message");
     }
   };

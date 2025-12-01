@@ -77,7 +77,6 @@ const AdminOrders: React.FC = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Update frontend state
       setOrders((prev) =>
         prev.map((o) =>
           o._id === selectedOrder._id ? { ...o, status: statusToUpdate } : o
@@ -89,7 +88,7 @@ const AdminOrders: React.FC = () => {
       );
 
       toast.success("Order status updated!");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Update Status Error:", error.response || error.message);
       toast.error(
@@ -174,13 +173,25 @@ const AdminOrders: React.FC = () => {
               <strong>Status:</strong>{" "}
               <select
                 value={newStatus}
-                onChange={(e) => setNewStatus(e.target.value)}
+                onChange={(e) => {
+                  if (newStatus === "Cancelled") return;
+                  setNewStatus(e.target.value);
+                }}
                 className="border p-2 rounded"
               >
-                <option value="Pending">Pending</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Cancelled">Cancelled</option>
+                {newStatus === "Cancelled" ? (
+                  <option value="Cancelled">Cancelled</option>
+                ) : (
+                  <>
+                    <option value="Pending">Pending</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+
+                    {newStatus !== "Delivered" && (
+                      <option value="Cancelled">Cancelled</option>
+                    )}
+                  </>
+                )}
               </select>
               <button
                 onClick={() => updateStatus(newStatus)}

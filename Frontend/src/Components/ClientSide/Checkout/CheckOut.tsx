@@ -71,6 +71,7 @@ const CheckOut: React.FC = () => {
     setPhone("");
     setCity("");
     setAddress("");
+    
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error : any) {
     console.error("Error placing order:", error);
