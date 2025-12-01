@@ -51,7 +51,6 @@ const AddProductPage = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    // Numbers convert to number type
     if (name === "price" || name === "rating") {
       setFormData({ ...formData, [name]: value === "" ? "" : Number(value) });
       return;
@@ -105,23 +104,45 @@ const AddProductPage = () => {
   };
 
   // Submit Data
-  const submitProduct = async (e: FormEvent) => {
-    e.preventDefault();
+ const submitProduct = async (e: FormEvent) => {
+  e.preventDefault();
 
-    try {
-      const res = await axios.post(
-  "http://localhost:5000/api/product/addproduct",
-  formData
-);
+  try {
+    const res = await axios.post(
+      "http://localhost:5000/api/product/addproduct",
+      formData
+    );
 
+    toast.success("Product added successfully!");
+    console.log(res.data);
 
-      toast.success("Product added successfully!");
-      console.log(res.data);
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to add product");
-    }
-  };
+    // RESET FORM HERE
+    setFormData({
+      name: "",
+      category: "",
+      price: "",
+      rating: "",
+      description: "",
+      shortDescription: "",
+      images: {
+        thumbnail: "",
+        detailImage: "",
+        gallery: [""],
+      },
+      specifications: {
+        material: "",
+        height: "",
+        width: "",
+        weight: "",
+        color: "",
+      },
+      availability: "In Stock",
+    });
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to add product");
+  }
+};
 
   return (
     <div className="p-6 bg-white shadow rounded-lg">
