@@ -15,6 +15,14 @@ interface UserInfo {
   email: string;
 }
 
+interface ShippingDetails {
+  fullName: string;
+  email: string;
+  phone: string;
+  city: string;
+  address: string;
+}
+
 interface Order {
   _id: string;
   userId: string;
@@ -22,6 +30,7 @@ interface Order {
   items: OrderItem[];
   totalPrice: number;
   status: string;
+  shippingDetails?: ShippingDetails;
   createdAt: string;
 }
 
@@ -129,8 +138,8 @@ const AdminOrders: React.FC = () => {
               orders.map((order) => (
                 <tr key={order._id} className="border-b hover:bg-gray-50">
                   <td className="p-4">{order._id}</td>
-                  <td className="p-4">{order.user?.fullName || "N/A"}</td>
-                  <td className="p-4">{order.user?.email || "N/A"}</td>
+                  <td className="p-4">{order.user?.fullName || "Un-Known"}</td>
+                  <td className="p-4">{order.user?.email || "In-Valid"}</td>
                   <td className="p-4">{order.items.length} items</td>
                   <td className="p-4">${order.totalPrice.toFixed(2)}</td>
                   <td className="p-4">{order.status}</td>
@@ -164,6 +173,30 @@ const AdminOrders: React.FC = () => {
             <p>
               <strong>Email:</strong> {selectedOrder.user?.email || "N/A"}
             </p>
+            <h3 className="text-lg font-semibold mt-4">Shipping Details</h3>
+            <div className="mt-2 space-y-1 bg-gray-100 p-3 rounded">
+              <p>
+                <strong>Name:</strong>{" "}
+                {selectedOrder.shippingDetails?.fullName || "N/A"}
+              </p>
+              <p>
+                <strong>Email:</strong>{" "}
+                {selectedOrder.shippingDetails?.email || "N/A"}
+              </p>
+              <p>
+                <strong>Phone:</strong>{" "}
+                {selectedOrder.shippingDetails?.phone || "N/A"}
+              </p>
+              <p>
+                <strong>City:</strong>{" "}
+                {selectedOrder.shippingDetails?.city || "N/A"}
+              </p>
+              <p>
+                <strong>Address:</strong>{" "}
+                {selectedOrder.shippingDetails?.address || "N/A"}
+              </p>
+            </div>
+
             <p className="mt-3">
               <strong>Total Price:</strong> $
               {selectedOrder.totalPrice.toFixed(2)}

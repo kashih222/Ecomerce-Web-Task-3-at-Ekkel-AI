@@ -23,10 +23,7 @@ const AdminContactMessages: React.FC = () => {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [selectedMessage, setSelectedMessage] = useState<ContactMessage | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-
-  // NEW: delete confirmation modal
   const [deleteId, setDeleteId] = useState<string | null>(null);
-
   const [loading, setLoading] = useState(true);
 
   const API_BASE = "http://localhost:5000/api/contact";
@@ -47,7 +44,6 @@ const AdminContactMessages: React.FC = () => {
     fetchMessages();
   }, []);
 
-  // Fetch a single message
   const openMessage = async (id: string): Promise<void> => {
     try {
       const { data } = await axios.get<ApiSingleMessageResponse>(`${API_BASE}/message/${id}`);
@@ -59,7 +55,6 @@ const AdminContactMessages: React.FC = () => {
     }
   };
 
-  // Delete message WITH CONFIRMATION MODAL
   const confirmDelete = async () => {
     if (!deleteId) return;
 
@@ -118,7 +113,7 @@ const AdminContactMessages: React.FC = () => {
                     </button>
 
                     <button
-                      onClick={() => setDeleteId(msg._id)}   // OPEN CONFIRM MODAL
+                      onClick={() => setDeleteId(msg._id)}   
                       className="px-4 py-2 bg-red-600 text-white rounded-lg hover:scale-95"
                     >
                       Delete
@@ -132,7 +127,6 @@ const AdminContactMessages: React.FC = () => {
         </table>
       </div>
 
-      {/* View Message Modal */}
       {modalOpen && selectedMessage && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
           <div className="bg-white rounded-xl p-6 w-[500px] shadow-xl">
@@ -159,7 +153,6 @@ const AdminContactMessages: React.FC = () => {
         </div>
       )}
 
-      {/* DELETE CONFIRMATION MODAL */}
       {deleteId && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white w-[380px] rounded-xl p-6 shadow-xl">

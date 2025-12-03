@@ -1,12 +1,11 @@
-// Toast.tsx
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Toast = () => {
   return (
     <ToastContainer
-      position="top-right"
-      autoClose={3000}      // auto-close after 3 seconds
+      position="bottom-right"
+      autoClose={1000}  
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
@@ -14,7 +13,7 @@ const Toast = () => {
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="light"         
+      theme="dark"         
     />
   );
 };

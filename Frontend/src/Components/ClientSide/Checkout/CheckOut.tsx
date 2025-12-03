@@ -1,6 +1,8 @@
 import React, { useContext, useMemo, useState } from "react";
 import axios from "axios";
-import CartContext, { type CartContextType } from "../../../context/CartContext";
+import CartContext, {
+  type CartContextType,
+} from "../../../context/CartContext";
 import { toast } from "react-toastify";
 
 const CheckOut: React.FC = () => {
@@ -19,68 +21,76 @@ const CheckOut: React.FC = () => {
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
 
- const handleOrder = async () => {
-  if (!fullName || !email || !phone || !city || !address) {
-    toast.error("Please fill in all shipping details.");
-    return;
-  }
-
-  if (cart.length === 0) {
-    toast.error("Cart is empty.");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    const orderData = {
-      fullName,
-      email,
-      phone,
-      city,
-      address,
-      items: cart.map((item) => ({
-        productId: item.productId,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      })),
-      total: totalPrice,
-    };
-
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      toast.error("You must be logged in to place an order.");
-      setLoading(false);
+  const handleOrder = async () => {
+    if (!fullName || !email || !phone || !city || !address) {
+      toast.error("Please fill in all shipping details.");
       return;
     }
 
-    await axios.post("http://localhost:5000/api/order/place-order", orderData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    if (cart.length === 0) {
+      toast.error("Cart is empty.");
+      return;
+    }
 
-    toast.success("Order placed successfully!");
+    setLoading(true);
 
-    cart.forEach((item) => removeItem(item.productId));
+    try {
+      const orderData = {
+        items: cart.map((item) => ({
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+        shippingDetails: {
+          fullName,
+          email,
+          phone,
+          city,
+          address,
+        },
+        totalPrice: totalPrice,
+      };
 
-    setFullName("");
-    setEmail("");
-    setPhone("");
-    setCity("");
-    setAddress("");
-    
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error : any) {
-    console.error("Error placing order:", error);
-    toast.error(error.response?.data?.message || "Failed to place order. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
+      const token = localStorage.getItem("token");
 
+      if (!token) {
+        toast.error("You must be logged in to place an order.");
+        setLoading(false);
+        return;
+      }
+
+      await axios.post(
+        "http://localhost:5000/api/order/place-order",
+        orderData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success("Order placed successfully!");
+
+      cart.forEach((item) => removeItem(item.productId));
+
+      setFullName("");
+      setEmail("");
+      setPhone("");
+      setCity("");
+      setAddress("");
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Error placing order:", error);
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to place order. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!cartContext) return <p className="text-center">Loading Cart...</p>;
 
@@ -96,7 +106,10 @@ const CheckOut: React.FC = () => {
           <p className="text-gray-500">Your cart is empty.</p>
         ) : (
           cart.map((item) => (
-            <div key={item.productId} className="flex items-center justify-between border-b py-4">
+            <div
+              key={item.productId}
+              className="flex items-center justify-between border-b py-4"
+            >
               <div className="flex items-center gap-4">
                 <img
                   src={item.images?.thumbnail || "/placeholder.jpg"}
@@ -147,7 +160,10 @@ const CheckOut: React.FC = () => {
       <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-4">Shipping Details</h2>
 
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <input
             type="text"
             placeholder="Full Name"
