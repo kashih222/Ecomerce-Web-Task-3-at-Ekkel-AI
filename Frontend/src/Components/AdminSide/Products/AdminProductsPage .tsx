@@ -349,13 +349,29 @@ const AdminProductsPage = () => {
                         />
                       </div>
 
-                      <textarea
-                        name="availability"
-                        placeholder="Availability"
-                        className="input"
-                        value={editProduct.availability}
-                        onChange={handleEditChange}
-                      />
+                      <div className="input flex gap-4 items-center">
+  <label className="flex items-center gap-2">
+    <input
+      type="radio"
+      name="availability"
+      value="In Stock"
+      checked={editProduct.availability === "In Stock"}
+      onChange={handleEditChange}
+    />
+    In Stock
+  </label>
+
+  <label className="flex items-center gap-2">
+    <input
+      type="radio"
+      name="availability"
+      value="Out of Stock"
+      checked={editProduct.availability === "Out of Stock"}
+      onChange={handleEditChange}
+    />
+    Out of Stock
+  </label>
+</div>
 
                       <div className="flex justify-end gap-2">
                         <button

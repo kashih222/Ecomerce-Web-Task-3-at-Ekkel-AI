@@ -7,8 +7,6 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import CartContext from "../../../context/CartContext";
 
-
-
 const FETCH_PRODUCTS = "http://localhost:5000/api/fetch/all-products";
 
 interface Product {
@@ -44,11 +42,6 @@ interface iSpecifications {
   material: string;
   width: string;
 }
-
-/**
- * Minimal CartContext type used by this component.
- * Adjust types/signatures to match your actual context implementation if needed.
- */
 
 
 const StarRating: React.FC<{ rating: number; maxRating?: number }> = ({
@@ -88,12 +81,11 @@ const ProductPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
 
-  // Use CartContext and guard against undefined
-      const cartContext = useContext(CartContext);
-      if (!cartContext) {
-        throw new Error("CartContext must be used within a CartProvider");
-      }
-      const { addToCart, loadCart } = cartContext;
+  const cartContext = useContext(CartContext);
+  if (!cartContext) {
+    throw new Error("CartContext must be used within a CartProvider");
+  }
+  const { addToCart, loadCart } = cartContext;
 
   // Fetch products
   useEffect(() => {
@@ -154,7 +146,7 @@ const ProductPage = () => {
           {currentProducts.map((product) => (
             <div
               key={product._id}
-              className="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-white p-5 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
             >
               <figure className="w-full h-64 overflow-hidden rounded-lg">
                 <img
@@ -187,10 +179,9 @@ const ProductPage = () => {
               </div>
 
               <p className="text-gray-700 font-bold mt-2">{product.price}$</p>
-
               {product.rating && <StarRating rating={product.rating} />}
 
-              <div className="flex gap-2 mt-4">
+              <div className="flex gap-2 mt-auto">
                 <button
                   className="w-full py-2 outline-1 text-black rounded-lg hover:scale-90 transition"
                   onClick={() => handleViewClick(product)}
@@ -200,12 +191,10 @@ const ProductPage = () => {
                 <button
                   className="w-full py-2 bg-gray-900 text-white rounded-lg hover:scale-90 hover:bg-gray-700 transition"
                   onClick={async () => {
-                    await addToCart(product._id, 1); 
-                    await loadCart(); 
-                    console.log("add to cart button clicked ")
-                  }
-                
-                }
+                    await addToCart(product._id, 1);
+                    await loadCart();
+                    console.log("add to cart button clicked ");
+                  }}
                 >
                   Add to Cart
                 </button>

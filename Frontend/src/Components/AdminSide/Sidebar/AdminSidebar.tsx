@@ -11,11 +11,11 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 interface SidebarProps {
   sidebarOpen: boolean;
 }
-import { useNavigate } from "react-router-dom";
-
 
 const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
   const Navigate = useNavigate();

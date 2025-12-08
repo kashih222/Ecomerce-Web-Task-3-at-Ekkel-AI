@@ -4,9 +4,11 @@ import CartContext, {
   type CartContextType,
 } from "../../../context/CartContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckOut: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); 
 
   const cartContext = useContext(CartContext) as CartContextType;
   const { cart, removeItem, updateQuantity } = cartContext;
@@ -79,6 +81,10 @@ const CheckOut: React.FC = () => {
       setPhone("");
       setCity("");
       setAddress("");
+
+         setTimeout(() => {
+        navigate("/products");
+      }, 1500);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

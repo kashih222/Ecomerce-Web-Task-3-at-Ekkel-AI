@@ -12,7 +12,7 @@ const AdminPanelLayout = () => {
       <div className="flex-1 flex flex-col">
         <AdminHeader toggleSidebar={() => setSidebarOpen(!sidebarOpen)} sidebarOpen={sidebarOpen} />
         <main className="p-6 overflow-y-auto h-[calc(100vh-70px)]">
-          <Outlet /> {/* Nested admin routes render here */}
+          <Outlet /> 
         </main>
       </div>
     </div>

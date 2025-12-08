@@ -22,7 +22,7 @@ const sendToken = (res, user, message, statusCode = 200) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production", 
     sameSite: "strict",
-    maxAge: 60 * 60 * 1000, // 1 hour
+    maxAge: 60 * 60 * 1000, //1h
   });
 
   res.status(statusCode).json({

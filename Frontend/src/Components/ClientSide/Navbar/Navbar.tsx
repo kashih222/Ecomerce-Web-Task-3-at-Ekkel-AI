@@ -11,6 +11,7 @@ import CartContext from "../../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 
+
 const API_REGISTER = "http://localhost:5000/api/auth/user/registeruser";
 const API_LOGIN = "http://localhost:5000/api/login/loginuser";
 const API_LOGOUT = "http://localhost:5000/api/auth/loging/logout";
@@ -35,6 +36,7 @@ const Navbar = () => {
   const [openProfile, setOpenProfile] = useState(false);
   const navigate = useNavigate();
 
+ 
 
   const cartContext = useContext(CartContext);
   const cart = cartContext?.cart || [];
@@ -239,14 +241,7 @@ const Navbar = () => {
 
         {/* Hamburger Menu */}
         <div className="md:hidden flex items-center justify-center gap-2">
-          <div className=" w-14 h-14 cursor-pointer">
-            <NavLink to="/cart">
-              <span className="text-white absolute right-15 bg-red-400 w-5 h-5 rounded-full flex items-center justify-center">
-                {cart.length}
-              </span>
-              <img src={cartpng} alt="Cart_png" />
-            </NavLink>
-          </div>
+          
           <div className="" onClick={() => setOpen(!open)}>
             {open ? <X size={30} /> : <Menu size={30} />}
           </div>
@@ -282,6 +277,14 @@ const Navbar = () => {
           {/* Mobile Buttons */}
           {user ? (
             <div className="flex items-center gap-2 relative">
+              <div className=" w-14 h-14 cursor-pointer">
+            <NavLink to="/cart">
+              <span className="text-white absolute  bg-red-400 w-5 h-5 rounded-full flex items-center justify-center">
+                {cart.length}
+              </span>
+              <img src={cartpng} alt="Cart_png" />
+            </NavLink>
+          </div>
               <div
                 className="rounded-full w-12 h-12 border border-gray-300 cursor-pointer flex items-center justify-center bg-gray-900 text-white font-bold hover:scale-95"
                 onClick={() => setOpenProfile(!openProfile)}

@@ -9,7 +9,7 @@ const User = require("../Model/User");
 
 router.post("/place-order", authMiddleware, async (req, res) => {
   try {
-    const { items, shippingDetails, totalPrice } = req.body;
+    const { items, shippingDetails, totalPrice,  } = req.body;
 
     if (!items || items.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
