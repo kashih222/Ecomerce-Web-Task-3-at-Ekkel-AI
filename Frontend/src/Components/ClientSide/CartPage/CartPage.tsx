@@ -1,13 +1,15 @@
-import { useEffect, useContext } from "react";
-import CartContext from "../../../context/CartContext";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../Redux Toolkit/hooks";
+import { fetchCart, removeItem, selectCartItems, updateQuantity } from "../../../Redux Toolkit/features/cart/cartSlice";
 
 const CartPage = () => {
-  const { cart, loadCart, updateQuantity, removeItem } = useContext(CartContext)!;
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(selectCartItems);
 
   useEffect(() => {
-    loadCart();
-  }, []);
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   const totalPrice = cart.reduce((sum, item) => sum + (item.price || 0) * item.quantity, 0);
 
@@ -56,7 +58,7 @@ const CartPage = () => {
                         <div className="flex items-center gap-3 mt-4">
                           <button
                             className="px-4 py-1 bg-gray-200 rounded-full hover:bg-gray-300 transition"
-                            onClick={() => updateQuantity(item.productId, "dec")}
+                            onClick={() => dispatch(updateQuantity({ productId: item.productId, action: "dec" }))}
                             disabled={item.quantity <= 1}
                           >
                             -
@@ -64,7 +66,7 @@ const CartPage = () => {
                           <span className="text-lg font-semibold">{item.quantity}</span>
                           <button
                             className="px-4 py-1 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition"
-                            onClick={() => updateQuantity(item.productId, "inc")}
+                            onClick={() => dispatch(updateQuantity({ productId: item.productId, action: "inc" }))}
                           >
                             +
                           </button>
@@ -73,7 +75,7 @@ const CartPage = () => {
 
                       <button
                         className="text-red-600 hover:text-red-800 text-xl font-bold"
-                        onClick={() => removeItem(item.productId)}
+                        onClick={() => dispatch(removeItem({ productId: item.productId }))}
                       >
                         ✕
                       </button>

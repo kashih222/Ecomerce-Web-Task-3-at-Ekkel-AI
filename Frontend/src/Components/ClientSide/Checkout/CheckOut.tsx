@@ -1,17 +1,15 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import axios from "axios";
-import CartContext, {
-  type CartContextType,
-} from "../../../context/CartContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../Redux Toolkit/hooks";
+import { removeItem, selectCartItems, updateQuantity } from "../../../Redux Toolkit/features/cart/cartSlice";
 
 const CheckOut: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate(); 
-
-  const cartContext = useContext(CartContext) as CartContextType;
-  const { cart, removeItem, updateQuantity } = cartContext;
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(selectCartItems);
 
   const totalPrice = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -74,7 +72,9 @@ const CheckOut: React.FC = () => {
 
       toast.success("Order placed successfully!");
 
-      cart.forEach((item) => removeItem(item.productId));
+      for (const item of cart) {
+        await dispatch(removeItem({ productId: item.productId }));
+      }
 
       setFullName("");
       setEmail("");
@@ -97,8 +97,6 @@ const CheckOut: React.FC = () => {
       setLoading(false);
     }
   };
-
-  if (!cartContext) return <p className="text-center">Loading Cart...</p>;
 
   return (
     <div className="max-w-6xl mx-auto p-6">
@@ -130,21 +128,21 @@ const CheckOut: React.FC = () => {
 
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => updateQuantity(item.productId, "dec")}
+                  onClick={() => dispatch(updateQuantity({ productId: item.productId, action: "dec" }))}
                   className="px-2 py-1 border rounded"
                 >
                   -
                 </button>
                 <span>{item.quantity}</span>
                 <button
-                  onClick={() => updateQuantity(item.productId, "inc")}
+                  onClick={() => dispatch(updateQuantity({ productId: item.productId, action: "inc" }))}
                   className="px-2 py-1 border rounded"
                 >
                   +
                 </button>
 
                 <button
-                  onClick={() => removeItem(item.productId)}
+                  onClick={() => dispatch(removeItem({ productId: item.productId }))}
                   className="ml-4 text-white hover:underline bg-red-500 px-2 py-1 rounded-sm hover:bg-red-600 hover:scale-95"
                 >
                   Remove

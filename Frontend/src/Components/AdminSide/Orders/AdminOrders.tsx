@@ -44,25 +44,32 @@ const AdminOrders: React.FC = () => {
   const FETCH_ALL_ORDER = "http://localhost:5000/api/order/all-orders";
   const UPDATE_STATUS = "http://localhost:5000/api/order/update-status/";
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const { data } = await axios.get<{ orders: Order[] }>(FETCH_ALL_ORDER, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+ useEffect(() => {
+  const fetchOrders = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.get<{ orders: Order[] }>(FETCH_ALL_ORDER, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-        setOrders(data.orders);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        toast.error("Failed to fetch orders");
-      } finally {
-        setLoading(false);
-      }
-    };
+      // Sort latest → oldest
+      const sortedOrders = data.orders.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
 
-    fetchOrders();
-  }, []);
+      setOrders(sortedOrders);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      toast.error("Failed to fetch orders");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchOrders();
+}, []);
+
 
   const openOrder = (order: Order) => {
     setSelectedOrder(order);
@@ -123,6 +130,7 @@ const AdminOrders: React.FC = () => {
               <th className="p-4 font-semibold">Items</th>
               <th className="p-4 font-semibold">Total Price</th>
               <th className="p-4 font-semibold">Status</th>
+              <th className="p-4 font-semibold">Date</th>
               <th className="p-4 font-semibold">Actions</th>
             </tr>
           </thead>
@@ -143,6 +151,7 @@ const AdminOrders: React.FC = () => {
                   <td className="p-4">{order.items.length} items</td>
                   <td className="p-4">${order.totalPrice.toFixed(2)}</td>
                   <td className="p-4">{order.status}</td>
+                  <td className="p-4">{order.createdAt}</td>
                   <td className="p-4">
                     <button
                       onClick={() => openOrder(order)}

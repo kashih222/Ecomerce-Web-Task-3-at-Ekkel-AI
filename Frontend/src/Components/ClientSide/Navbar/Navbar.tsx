@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link,  NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../../../assets/Logo.png";
@@ -7,8 +7,8 @@ import type { SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import cartpng from "../../../assets/shopping-cart.gif";
-import CartContext from "../../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../Redux Toolkit/hooks";
 
 
 
@@ -38,8 +38,7 @@ const Navbar = () => {
 
  
 
-  const cartContext = useContext(CartContext);
-  const cart = cartContext?.cart || [];
+  const cart = useAppSelector((state) => state.cart.items);
 
   const delay = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));

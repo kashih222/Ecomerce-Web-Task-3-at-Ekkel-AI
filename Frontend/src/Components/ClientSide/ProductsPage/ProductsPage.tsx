@@ -1,11 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import type { ChangeEvent } from "react";
 import Category from "./Category/Category";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import CartContext from "../../../context/CartContext";
+import { addToCart, fetchCart } from "../../../Redux Toolkit/features/cart/cartSlice";
+import { useAppDispatch } from "../../../Redux Toolkit/hooks";
 
 const FETCH_PRODUCTS = "http://localhost:5000/api/fetch/all-products";
 
@@ -81,11 +82,7 @@ const ProductPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
 
-  const cartContext = useContext(CartContext);
-  if (!cartContext) {
-    throw new Error("CartContext must be used within a CartProvider");
-  }
-  const { addToCart, loadCart } = cartContext;
+  const dispatch = useAppDispatch();
 
   // Fetch products
   useEffect(() => {
@@ -102,7 +99,8 @@ const ProductPage = () => {
     };
 
     loadProducts();
-  }, []);
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   // Category Filter
   const handleCategorySelect = (category: string) => {
@@ -191,8 +189,7 @@ const ProductPage = () => {
                 <button
                   className="w-full py-2 bg-gray-900 text-white rounded-lg hover:scale-90 hover:bg-gray-700 transition"
                   onClick={async () => {
-                    await addToCart(product._id, 1);
-                    await loadCart();
+                    await dispatch(addToCart({ productId: product._id, quantity: 1 }));
                     console.log("add to cart button clicked ");
                   }}
                 >
@@ -280,8 +277,7 @@ const ProductPage = () => {
                     className="mt-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition"
                     onClick={async () => {
                       if (!selectedProduct) return;
-                      await addToCart(selectedProduct._id, 1);
-                      await loadCart();
+                      await dispatch(addToCart({ productId: selectedProduct._id, quantity: 1 }));
                     }}
                   >
                     Add to Cart
