@@ -149,9 +149,9 @@ const AdminOrders: React.FC = () => {
                   <td className="p-4">{order.user?.fullName || "Un-Known"}</td>
                   <td className="p-4">{order.user?.email || "In-Valid"}</td>
                   <td className="p-4">{order.items.length} items</td>
-                  <td className="p-4">${order.totalPrice.toFixed(2)}</td>
+                  <td className="p-4">${Number(order?.totalPrice ?? 0).toFixed(2)}</td>
                   <td className="p-4">{order.status}</td>
-                  <td className="p-4">{order.createdAt}</td>
+                  <td className="p-4">{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td className="p-4">
                     <button
                       onClick={() => openOrder(order)}

@@ -61,7 +61,10 @@ const DashboardHome: React.FC = () => {
 
         const orders = ordersRes.data.orders;
 
-        const revenue = orders.reduce((sum, order) => sum + order.totalPrice, 0);
+        const revenue = orders.reduce(
+          (sum, order) => sum + Number(order?.totalPrice ?? 0),
+          0
+        );
         setTotalRevenue(revenue);
 
         const recent = orders
@@ -81,7 +84,8 @@ const DashboardHome: React.FC = () => {
     fetchDashboardData();
   }, []);
 
-  if (loading) return <div className="text-center py-20">Loading dashboard...</div>;
+  if (loading)
+    return <div className="text-center py-20">Loading dashboard...</div>;
 
   return (
     <div className="bg-gray-100 min-h-screen w-full p-6">
@@ -187,7 +191,9 @@ const DashboardHome: React.FC = () => {
                       {order.status}
                     </span>
                   </td>
-                  <td className="px-4 py-2">${order.totalPrice.toFixed(2)}</td>
+                  <td className="px-4 py-2">
+                    ${Number(order.totalPrice ?? 0).toFixed(2)}
+                  </td>
                 </tr>
               ))}
               {recentOrders.length === 0 && (

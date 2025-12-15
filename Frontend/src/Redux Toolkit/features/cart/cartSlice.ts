@@ -20,13 +20,13 @@ type CartState = {
   error: string | null;
 };
 
-// AUTH TOKEN HELPER
+// AUTH TOKEN
 const getHeaders = () => {
   const token = localStorage.getItem("token");
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
-// 1) FETCH CART
+// FETCH CART
 export const fetchCart = createAsyncThunk<CartItem[], void, { rejectValue: string }>(
   "cart/fetch",
   async (_, { rejectWithValue }) => {
@@ -44,7 +44,7 @@ export const fetchCart = createAsyncThunk<CartItem[], void, { rejectValue: strin
   }
 );
 
-// 2) ADD TO CART
+//  ADD TO CART
 export const addToCart = createAsyncThunk<
   CartItem[],
   { productId: string; quantity?: number },
@@ -64,7 +64,7 @@ export const addToCart = createAsyncThunk<
   }
 });
 
-// 3) UPDATE QUANTITY
+//  UPDATE QUANTITY
 export const updateQuantity = createAsyncThunk<
   CartItem[],
   { productId: string; action: "inc" | "dec" },
@@ -90,7 +90,7 @@ export const updateQuantity = createAsyncThunk<
   }
 });
 
-// 4) REMOVE ITEM
+//  REMOVE ITEM
 export const removeItem = createAsyncThunk<
   CartItem[],
   { productId: string },
@@ -110,9 +110,9 @@ export const removeItem = createAsyncThunk<
   }
 });
 
-// ----------------------
+
 // SLICE
-// ----------------------
+
 const initialState: CartState = {
   items: [],
   status: "idle",
@@ -165,7 +165,7 @@ const cartSlice = createSlice({
   },
 });
 
-// Selector
+
 export const selectCartItems = (state: RootState) => state.cart.items;
 
 export default cartSlice.reducer;
