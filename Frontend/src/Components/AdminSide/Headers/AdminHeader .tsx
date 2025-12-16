@@ -38,6 +38,7 @@ const AdminHeader: React.FC<SidebarProps> = ({ toggleSidebar }) => {
     try {
       await axios.post("http://localhost:5000/api/auth/loging/logout", {}, { withCredentials: true });
       toast.success("Logged out successfully!");
+      localStorage.removeItem("token");
       navigate("/");
     } catch (error) {
       console.error(error);

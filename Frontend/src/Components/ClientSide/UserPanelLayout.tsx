@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../ClientSide/HomePage/HomePage";
 import AboutPage from "../ClientSide/AboutPage/AboutPage";
@@ -8,17 +8,16 @@ import CartPage from "../ClientSide/CartPage/CartPage";
 import Navbar from "../ClientSide/Navbar/Navbar";
 import Footer from "../ClientSide/Footer/Footer";
 import Toast from "../ClientSide/Toaster/Toast";
-import CartContext from "../../context/CartContext";
 import CheckOut from "../ClientSide/Checkout/CheckOut";
+import { useAppDispatch } from "../../Redux Toolkit/hooks";
+import { fetchCart } from "../../Redux Toolkit/features/cart/cartSlice";
 
 const UserPanelLayout = () => {
-  const cartContext = useContext(CartContext);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (cartContext?.loadCart) {
-      cartContext.loadCart();
-    }
-  }, []);
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   return (
     <div>

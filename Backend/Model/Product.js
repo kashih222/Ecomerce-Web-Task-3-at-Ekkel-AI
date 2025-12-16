@@ -40,11 +40,7 @@ const productSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
-      gallery: [
-        {
-          type: String,
-        },
-      ],
+      gallery: [String],
       detailImage: {
         type: String,
       },

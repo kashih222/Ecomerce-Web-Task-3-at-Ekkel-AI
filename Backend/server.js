@@ -6,6 +6,7 @@ const authRoutes = require("./Routes/authRoutes");
 const productRoutes = require("./Routes/productRoutes")
 const cartRoutes = require ("./Routes/cartRoutes");
 const authMiddleware = require ("./Middlewares/authMiddleware")
+const guestAuthMiddleware = require("./Middlewares/guestAuthMiddleware");
 const contactRoutes = require("./Routes/contactRoutes");
 const orderRoutes = require ("./Routes/orderRoutes");
 
@@ -53,7 +54,7 @@ app.use("/api/single-product", productRoutes);
 app.use("/api/product-catagory", productRoutes);
 
 // Cart API
-app.use("/api/cart", authMiddleware, cartRoutes);
+app.use("/api/cart", guestAuthMiddleware, cartRoutes);
 
 // Order API
 app.use("/api/order", orderRoutes);

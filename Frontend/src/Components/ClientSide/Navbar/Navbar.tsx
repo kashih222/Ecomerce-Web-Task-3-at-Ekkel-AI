@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { Link,  NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../../../assets/Logo.png";
 import { useForm } from "react-hook-form";
@@ -7,10 +7,8 @@ import type { SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
 import cartpng from "../../../assets/shopping-cart.gif";
-import CartContext from "../../../context/CartContext";
 import { useNavigate } from "react-router-dom";
-
-
+import { useAppSelector } from "../../../Redux Toolkit/hooks";
 
 const API_REGISTER = "http://localhost:5000/api/auth/user/registeruser";
 const API_LOGIN = "http://localhost:5000/api/login/loginuser";
@@ -32,14 +30,13 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [OpenLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
-  const [user, setUser] = useState<{ fullname: string; email: string } | null>(null);
+  const [user, setUser] = useState<{ fullname: string; email: string } | null>(
+    null
+  );
   const [openProfile, setOpenProfile] = useState(false);
   const navigate = useNavigate();
 
- 
-
-  const cartContext = useContext(CartContext);
-  const cart = cartContext?.cart || [];
+  const cart = useAppSelector((state) => state.cart.items);
 
   const delay = (ms: number) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -185,18 +182,18 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex gap-4">
+          <div className=" w-14 h-14 cursor-pointer">
+            <NavLink to="/cart">
+              <span className="text-white font-bold absolute  bg-red-400 w-5 h-5 rounded-full flex items-center justify-center">
+                {cart.length}
+              </span>
+
+              <img src={cartpng} alt="Cart_png" />
+            </NavLink>
+          </div>
           {user ? (
             <div className="relative">
               <div className="flex items-center justify-center gap-2">
-                <div className=" w-14 h-14 cursor-pointer">
-                  <NavLink to="/cart">
-                    <span className="text-white font-bold absolute right-15 bg-red-400 w-5 h-5 rounded-full flex items-center justify-center">
-                      {cart.length}
-                    </span>
-
-                    <img src={cartpng} alt="Cart_png" />
-                  </NavLink>
-                </div>
                 <div
                   className="rounded-full w-12 h-12 border border-gray-300 cursor-pointer flex items-center justify-center bg-black text-white font-bold hover:scale-95"
                   onClick={() => setOpenProfile(!openProfile)}
@@ -241,7 +238,6 @@ const Navbar = () => {
 
         {/* Hamburger Menu */}
         <div className="md:hidden flex items-center justify-center gap-2">
-          
           <div className="" onClick={() => setOpen(!open)}>
             {open ? <X size={30} /> : <Menu size={30} />}
           </div>
@@ -273,11 +269,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-
-          {/* Mobile Buttons */}
-          {user ? (
-            <div className="flex items-center gap-2 relative">
-              <div className=" w-14 h-14 cursor-pointer">
+          <div className=" w-14 h-14 cursor-pointer">
             <NavLink to="/cart">
               <span className="text-white absolute  bg-red-400 w-5 h-5 rounded-full flex items-center justify-center">
                 {cart.length}
@@ -285,6 +277,10 @@ const Navbar = () => {
               <img src={cartpng} alt="Cart_png" />
             </NavLink>
           </div>
+          {/* Mobile Buttons */}
+
+          {user ? (
+            <div className="flex items-center gap-2 relative">
               <div
                 className="rounded-full w-12 h-12 border border-gray-300 cursor-pointer flex items-center justify-center bg-gray-900 text-white font-bold hover:scale-95"
                 onClick={() => setOpenProfile(!openProfile)}

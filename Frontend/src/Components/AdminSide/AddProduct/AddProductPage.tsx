@@ -104,9 +104,14 @@ const AddProductPage = () => {
   e.preventDefault();
 
   try {
+    const payload = {
+      ...formData,
+      rating: formData.rating === "" ? 0 : formData.rating,
+    };
+
     const res = await axios.post(
       "http://localhost:5000/api/product/addproduct",
-      formData
+      payload
     );
 
     toast.success("Product added successfully!");
