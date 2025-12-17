@@ -14,7 +14,6 @@ interface Product {
   name: string;
   category: string;
   price: number;
-  rating: number;
   availability: string;
   images: {
     thumbnail: string;
@@ -97,14 +96,7 @@ const AdminProductsPage = () => {
     if (!editProduct) return;
     const { name, value } = e.target;
 
-    // Handle numbers
-    if (name === "price" || name === "rating") {
-      setEditProduct({
-        ...editProduct,
-        [name]: value === "" ? 0 : Number(value),
-      });
-      return;
-    }
+   
 
     // Handle availability
     if (name === "availability") {
@@ -150,7 +142,6 @@ const AdminProductsPage = () => {
               <th className="p-3 border">Name</th>
               <th className="p-3 border">Category</th>
               <th className="p-3 border">Price</th>
-              <th className="p-3 border">Rating</th>
               <th className="p-3 border">Status</th>
               <th className="p-3 border">Actions</th>
             </tr>
@@ -170,7 +161,6 @@ const AdminProductsPage = () => {
                 <td className="p-2 border font-medium">{prod.name}</td>
                 <td className="p-2 border">{prod.category}</td>
                 <td className="p-2 border">${prod.price}</td>
-                <td className="p-2 border">{prod.rating} ⭐</td>
 
                 <td className="p-2 border">
                   {prod.availability === "In Stock" ? (
@@ -339,14 +329,7 @@ const AdminProductsPage = () => {
                           onChange={handleEditChange}
                           required
                         />
-                        <input
-                          name="rating"
-                          type="number"
-                          placeholder="Rating"
-                          className="input"
-                          value={editProduct.rating}
-                          onChange={handleEditChange}
-                        />
+                        
                       </div>
 
                       <div className="input flex gap-4 items-center">

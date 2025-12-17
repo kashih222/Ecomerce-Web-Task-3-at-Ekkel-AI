@@ -1,4 +1,3 @@
-import FeatureProducts from "../Feature Products/FeatureProducts";
 const HomePage = () => {
   return (
     <>
@@ -51,7 +50,6 @@ const HomePage = () => {
       </div>
       
     </div>
-    <FeatureProducts/>
     </>
   );
 };

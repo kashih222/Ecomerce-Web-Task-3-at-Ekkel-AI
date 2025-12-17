@@ -18,12 +18,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
-    rating: {
-      type: Number,
-      default: 0,
-      min: 0,
-      max: 5,
-    },
+    
 
     description: {
       type: String,
@@ -59,24 +54,7 @@ const productSchema = new mongoose.Schema(
       default: "In Stock",
     },
 
-    reviews: [
-      {
-        user: {
-          type: String,
-          required: true,
-        },
-        rating: {
-          type: Number,
-          min: 0,
-          max: 5,
-          required: true,
-        },
-        comment: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    
   },
   { timestamps: true }
 );

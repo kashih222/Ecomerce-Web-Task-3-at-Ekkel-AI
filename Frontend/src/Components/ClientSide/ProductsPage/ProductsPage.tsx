@@ -15,7 +15,6 @@ interface Product {
   name: string;
   price: number;
   images: ProductImages;
-  rating: number;
   category: string;
   description?: string;
   shortDescription: string;
@@ -33,7 +32,6 @@ interface ProductImages {
 interface iReview {
   user: string;
   comment: string;
-  rating: number;
 }
 
 interface iSpecifications {
@@ -45,31 +43,7 @@ interface iSpecifications {
 }
 
 
-const StarRating: React.FC<{ rating: number; maxRating?: number }> = ({
-  rating,
-  maxRating = 5,
-}) => {
-  const fullStars = Math.floor(rating);
-  const halfStar = rating % 1 >= 0.5;
-  const emptyStars = maxRating - fullStars - (halfStar ? 1 : 0);
 
-  return (
-    <div className="flex items-center mt-2">
-      {Array.from({ length: fullStars }).map((_, i) => (
-        <span key={`full-${i}`} className="text-yellow-400 text-lg">
-          ★
-        </span>
-      ))}
-      {halfStar && <span className="text-yellow-400 text-lg">☆</span>}
-      {Array.from({ length: emptyStars }).map((_, i) => (
-        <span key={`empty-${i}`} className="text-gray-300 text-lg">
-          ★
-        </span>
-      ))}
-      <span className="ml-2 text-gray-600 text-sm">({rating})</span>
-    </div>
-  );
-};
 
 const ProductPage = () => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
@@ -179,7 +153,6 @@ const ProductPage = () => {
               </div>
 
               <p className="text-gray-700 font-bold mt-2">{product.price}$</p>
-              {product.rating && <StarRating rating={product.rating} />}
 
               <div className="flex gap-2 mt-auto">
                 <button

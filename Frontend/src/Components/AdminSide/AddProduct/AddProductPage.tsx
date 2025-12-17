@@ -6,7 +6,6 @@ interface ProductForm {
   name: string;
   category: string;
   price: number | "";
-  rating: number | "";
   description: string;
   shortDescription: string;
   images: {
@@ -29,7 +28,6 @@ const AddProductPage = () => {
     name: "",
     category: "",
     price: "",
-    rating: "",
     description: "",
     shortDescription: "",
     images: {
@@ -50,10 +48,7 @@ const AddProductPage = () => {
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
 
-    if (name === "price" || name === "rating") {
-      setFormData({ ...formData, [name]: value === "" ? "" : Number(value) });
-      return;
-    }
+  
 
     setFormData({ ...formData, [name]: value });
   };
@@ -106,7 +101,6 @@ const AddProductPage = () => {
   try {
     const payload = {
       ...formData,
-      rating: formData.rating === "" ? 0 : formData.rating,
     };
 
     const res = await axios.post(
@@ -117,12 +111,10 @@ const AddProductPage = () => {
     toast.success("Product added successfully!");
     console.log(res.data);
 
-    // RESET FORM HERE
     setFormData({
       name: "",
       category: "",
       price: "",
-      rating: "",
       description: "",
       shortDescription: "",
       images: {
@@ -164,13 +156,7 @@ const AddProductPage = () => {
             required
           />
 
-          <input
-            name="rating"
-            type="number"
-            placeholder="Rating"
-            className="input"
-            onChange={handleChange}
-          />
+          
         </div>
 
         <textarea
