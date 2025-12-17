@@ -41,35 +41,38 @@ const AdminOrders: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [newStatus, setNewStatus] = useState("Pending");
 
-  const FETCH_ALL_ORDER = `${import.meta.env.VITE_API_BASE}api/order/all-orders`;
-  const UPDATE_STATUS = `${import.meta.env.VITE_API_BASE}api/order/update-status/`;
+  const FETCH_ALL_ORDER = `${
+    import.meta.env.VITE_API_BASE
+  }api/order/all-orders`;
+  const UPDATE_STATUS = `${
+    import.meta.env.VITE_API_BASE
+  }api/order/update-status/`;
 
- useEffect(() => {
-  const fetchOrders = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const { data } = await axios.get<{ orders: Order[] }>(FETCH_ALL_ORDER, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const { data } = await axios.get<{ orders: Order[] }>(FETCH_ALL_ORDER, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-      // Sort latest → oldest
-      const sortedOrders = data.orders.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+        // Sort latest → oldest
+        const sortedOrders = data.orders.sort(
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
 
-      setOrders(sortedOrders);
-    } catch (error) {
-      console.error("Error fetching orders:", error);
-      toast.error("Failed to fetch orders");
-    } finally {
-      setLoading(false);
-    }
-  };
+        setOrders(sortedOrders);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+        toast.error("Failed to fetch orders");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchOrders();
-}, []);
-
+    fetchOrders();
+  }, []);
 
   const openOrder = (order: Order) => {
     setSelectedOrder(order);
@@ -104,12 +107,14 @@ const AdminOrders: React.FC = () => {
       );
 
       toast.success("Order status updated!");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.error("Update Status Error:", error.response || error.message);
-      toast.error(
-        error.response?.data?.message || "Failed to update order status"
-      );
+    } catch (error: unknown) {
+      console.error("Update Status Error:", error);
+
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Failed to update order status");
+      }
     }
   };
 
@@ -149,9 +154,13 @@ const AdminOrders: React.FC = () => {
                   <td className="p-4">{order.user?.fullName || "Un-Known"}</td>
                   <td className="p-4">{order.user?.email || "In-Valid"}</td>
                   <td className="p-4">{order.items.length} items</td>
-                  <td className="p-4">${Number(order?.totalPrice ?? 0).toFixed(2)}</td>
+                  <td className="p-4">
+                    ${Number(order?.totalPrice ?? 0).toFixed(2)}
+                  </td>
                   <td className="p-4">{order.status}</td>
-                  <td className="p-4">{new Date(order.createdAt).toLocaleDateString()}</td>
+                  <td className="p-4">
+                    {new Date(order.createdAt).toLocaleDateString()}
+                  </td>
                   <td className="p-4">
                     <button
                       onClick={() => openOrder(order)}

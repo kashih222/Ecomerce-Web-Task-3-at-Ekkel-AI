@@ -6,7 +6,6 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Helper: send token in HTTP-only cookie
 const sendToken = (res, user, message, statusCode = 200) => {
   const token = jwt.sign(
     { id: user._id, fullname: user.fullname, email: user.email },
@@ -81,16 +80,12 @@ const getMe = async (req, res) => {
     if (!token) {
       return res.status(200).json({ message: "Not authenticated", user: null });
     }
-
-    // Verify token
     let decoded;
     try {
       decoded = jwt.verify(token, JWT_SECRET);
     } catch (err) {
       return res.status(200).json({ message: "Invalid token", user: null });
     }
-
-    // Find user by ID
     const user = await User.findById(decoded.id).select("-password"); 
     if (!user) {
       return res.status(200).json({ message: "User not found", user: null });
@@ -110,6 +105,7 @@ const getMe = async (req, res) => {
   }
 };
 
+
 // Logout user
 const logoutUser = (req, res) => {
   res.cookie("token", "", {
@@ -119,6 +115,7 @@ const logoutUser = (req, res) => {
 
   res.status(200).json({ message: "Logged out successfully" });
 };
+
 
 // Get all users
 const getAllUsers = async (req, res) => {

@@ -1,9 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-import type {  RootState } from "../../types";
-
-
+import type { RootState } from "../../types";
 
 export type CartItem = {
   _id: string;
@@ -20,7 +18,6 @@ type CartState = {
   error: string | null;
 };
 
-
 const getHeaders = () => {
   const token = localStorage.getItem("token");
   return token ? { Authorization: `Bearer ${token}` } : {};
@@ -36,22 +33,22 @@ const getCartId = () => {
 };
 
 // FETCH CART
-export const fetchCart = createAsyncThunk<CartItem[], void, { rejectValue: string }>(
-  "cart/fetch",
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_BASE}api/cart/get-cart?cartId=${getCartId()}`,
-        { headers: getHeaders() }
-      );
-      return res.data.cartItems || [];
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
-      // toast.error("Could not load cart",);
-      return rejectWithValue("Could not load cart");
-    }
+export const fetchCart = createAsyncThunk<
+  CartItem[],
+  void,
+  { rejectValue: string }
+>("cart/fetch", async (_, { rejectWithValue }) => {
+  try {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_BASE}api/cart/get-cart?cartId=${getCartId()}`,
+      { headers: getHeaders() }
+    );
+    return res.data.cartItems || [];
+  } catch (err) {
+    console.log(err)
+    return rejectWithValue("Could not load cart");
   }
-);
+});
 
 //  ADD TO CART
 export const addToCart = createAsyncThunk<
@@ -78,26 +75,29 @@ export const updateQuantity = createAsyncThunk<
   CartItem[],
   { productId: string; action: "inc" | "dec" },
   { state: RootState; rejectValue: string }
->("cart/updateQty", async ({ productId, action }, { getState, rejectWithValue }) => {
-  try {
-    const item = getState().cart.items.find((i) => i.productId === productId);
-    if (!item) return rejectWithValue("Not found");
+>(
+  "cart/updateQty",
+  async ({ productId, action }, { getState, rejectWithValue }) => {
+    try {
+      const item = getState().cart.items.find((i) => i.productId === productId);
+      if (!item) return rejectWithValue("Not found");
 
-    const newQty = action === "inc" ? item.quantity + 1 : item.quantity - 1;
-    if (newQty < 1) return rejectWithValue("Invalid quantity");
+      const newQty = action === "inc" ? item.quantity + 1 : item.quantity - 1;
+      if (newQty < 1) return rejectWithValue("Invalid quantity");
 
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_BASE}api/cart/update-qty`,
-      { productId, quantity: newQty, cartId: getCartId() },
-      { headers: getHeaders() }
-    );
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_BASE}api/cart/update-qty`,
+        { productId, quantity: newQty, cartId: getCartId() },
+        { headers: getHeaders() }
+      );
 
-    return res.data.cartItems || [];
-  } catch {
-    toast.error("Update failed");
-    return rejectWithValue("Update failed");
+      return res.data.cartItems || [];
+    } catch {
+      toast.error("Update failed");
+      return rejectWithValue("Update failed");
+    }
   }
-});
+);
 
 //  REMOVE ITEM
 export const removeItem = createAsyncThunk<
@@ -118,7 +118,6 @@ export const removeItem = createAsyncThunk<
     return rejectWithValue("Remove failed");
   }
 });
-
 
 // SLICE
 
@@ -173,7 +172,6 @@ const cartSlice = createSlice({
       });
   },
 });
-
 
 export const selectCartItems = (state: RootState) => state.cart.items;
 

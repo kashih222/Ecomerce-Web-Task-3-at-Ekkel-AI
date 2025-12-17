@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const authRoutes = require("./Routes/authRoutes");
 const productRoutes = require("./Routes/productRoutes")
 const cartRoutes = require ("./Routes/cartRoutes");
-const authMiddleware = require ("./Middlewares/authMiddleware")
 const guestAuthMiddleware = require("./Middlewares/guestAuthMiddleware");
 const contactRoutes = require("./Routes/contactRoutes");
 const orderRoutes = require ("./Routes/orderRoutes");

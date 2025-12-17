@@ -3,11 +3,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../Redux Toolkit/hooks";
-import { removeItem, selectCartItems, updateQuantity } from "../../../Redux Toolkit/features/cart/cartSlice";
+import {
+  removeItem,
+  selectCartItems,
+  updateQuantity,
+} from "../../../Redux Toolkit/features/cart/cartSlice";
 
 const CheckOut: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCartItems);
 
@@ -49,25 +53,23 @@ const CheckOut: React.FC = () => {
           city,
           address,
         },
-        totalPrice: totalPrice,
+        totalPrice,
       };
 
       const token = localStorage.getItem("token");
 
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
 
       await axios.post(
         `${import.meta.env.VITE_API_BASE}api/order/place-order`,
         orderData,
-        {
-          headers,
-        }
+        { headers }
       );
 
       toast.success("Order placed successfully!");
 
       for (const item of cart) {
-        await dispatch(removeItem({ productId: item.productId }));
+        dispatch(removeItem({ productId: item.productId }));
       }
 
       setFullName("");
@@ -76,17 +78,22 @@ const CheckOut: React.FC = () => {
       setCity("");
       setAddress("");
 
-         setTimeout(() => {
+      setTimeout(() => {
         navigate("/products");
       }, 1500);
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error placing order:", error);
-      toast.error(
-        error.response?.data?.message ||
-          "Failed to place order. Please try again."
-      );
+
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message ||
+            "Failed to place order. Please try again."
+        );
+      } else if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Failed to place order. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -122,21 +129,37 @@ const CheckOut: React.FC = () => {
 
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => dispatch(updateQuantity({ productId: item.productId, action: "dec" }))}
+                  onClick={() =>
+                    dispatch(
+                      updateQuantity({
+                        productId: item.productId,
+                        action: "dec",
+                      })
+                    )
+                  }
                   className="px-2 py-1 border rounded"
                 >
                   -
                 </button>
                 <span>{item.quantity}</span>
                 <button
-                  onClick={() => dispatch(updateQuantity({ productId: item.productId, action: "inc" }))}
+                  onClick={() =>
+                    dispatch(
+                      updateQuantity({
+                        productId: item.productId,
+                        action: "inc",
+                      })
+                    )
+                  }
                   className="px-2 py-1 border rounded"
                 >
                   +
                 </button>
 
                 <button
-                  onClick={() => dispatch(removeItem({ productId: item.productId }))}
+                  onClick={() =>
+                    dispatch(removeItem({ productId: item.productId }))
+                  }
                   className="ml-4 text-white hover:underline bg-red-500 px-2 py-1 rounded-sm hover:bg-red-600 hover:scale-95"
                 >
                   Remove
