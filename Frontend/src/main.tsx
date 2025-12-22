@@ -4,11 +4,12 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import  store  from "./Redux Toolkit/store.ts";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/client";
 
 
 const client = new ApolloClient({
   uri: import.meta.env.VITE_GRAPHQL_ENDPOINT, 
+  link: new HttpLink({ uri: 'http://localhost:4100/' }),
   cache: new InMemoryCache(),
 });
 

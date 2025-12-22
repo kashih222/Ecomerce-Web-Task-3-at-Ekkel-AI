@@ -82,6 +82,7 @@ const typeDefs = `
 }
 
   type CartItem {
+  _id: ID
   productId: ID!
   name: String
   price: Float

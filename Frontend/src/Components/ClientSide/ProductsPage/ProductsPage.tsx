@@ -5,7 +5,10 @@ import Category from "./Category/Category";
 import { toast } from "react-toastify";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { addToCart, fetchCart } from "../../../Redux Toolkit/features/cart/cartSlice";
+import {
+  addToCart,
+  fetchCart,
+} from "../../../Redux Toolkit/features/cart/cartSlice";
 import { useAppDispatch } from "../../../Redux Toolkit/hooks";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_PRODUCTS } from "../../../GraphqlOprations/queries";
@@ -148,7 +151,7 @@ const ProductPage = () => {
                 <button
                   className="w-full py-2 bg-gray-900 text-white rounded-lg hover:scale-90 hover:bg-gray-700 transition"
                   onClick={async () => {
-                    await dispatch(addToCart({ productId: product.id, quantity: 1 }));
+                    await dispatch(addToCart({ product, quantity: 1 }));
                   }}
                 >
                   Add to Cart
@@ -194,7 +197,10 @@ const ProductPage = () => {
                   </figure>
 
                   <div className="flex gap-2">
-                    {[selectedProduct.images.detailImage, ...selectedProduct.images.gallery]
+                    {[
+                      selectedProduct.images.detailImage,
+                      ...selectedProduct.images.gallery,
+                    ]
                       .filter(Boolean)
                       .map((img, idx) => (
                         <img
@@ -211,7 +217,9 @@ const ProductPage = () => {
                 <div className="flex flex-col gap-4">
                   <h2 className="text-3xl font-bold">{selectedProduct.name}</h2>
                   <p className="text-gray-600">{selectedProduct.category}</p>
-                  <p className="text-xl font-semibold">${selectedProduct.price}</p>
+                  <p className="text-xl font-semibold">
+                    ${selectedProduct.price}
+                  </p>
                   <p
                     className={`font-medium ${
                       selectedProduct.availability.toLowerCase() === "in stock"
@@ -225,7 +233,9 @@ const ProductPage = () => {
                   <div className="flex items-center gap-4 mt-4">
                     <button
                       className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
-                      onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                      onClick={() =>
+                        setQuantity((prev) => Math.max(1, prev - 1))
+                      }
                     >
                       -
                     </button>
@@ -242,7 +252,9 @@ const ProductPage = () => {
                     className="mt-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition"
                     onClick={async () => {
                       if (!selectedProduct) return;
-                      await dispatch(addToCart({ productId: selectedProduct.id, quantity }));
+                      await dispatch(
+                        addToCart({ product: selectedProduct, quantity })
+                      );
                       setOpenViewModal(false);
                     }}
                   >

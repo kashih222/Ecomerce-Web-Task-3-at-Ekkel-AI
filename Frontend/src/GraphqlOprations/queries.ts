@@ -54,14 +54,14 @@ export const GET_LOGED_IN_USER_INFO = gql`
     role
   }
 }
-
 `;
 
-
-
 export const GET_CART = gql`
-  query GetCart($input: GetCartInput!) {
-    getCart(input: $input) {
+  query GetCart($userId: ID, $cartId: String) {
+    getCart(userId: $userId, cartId: $cartId) {
+      _id
+      userId
+      cartId
       cartItems {
         _id
         productId

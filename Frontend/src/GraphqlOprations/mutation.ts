@@ -51,27 +51,32 @@ export const DELETE_USER = gql`
 `;
 
 // ADD TO CART
-export const ADD_TO_CART = gql`
-  mutation AddToCart($input: AddToCartInput!) {
-    addToCart(input: $input) {
-      cartItems {
-        _id
-        productId
-        name
-        price
-        quantity
-        images {
-          thumbnail
-        }
+export const ADD_TO_CART_ITEMS = gql`
+ mutation AddToCart($item: CartItemInput!, $userId: ID, $cartId: String) {
+  addToCart(userId: $userId, cartId: $cartId, item: $item) {
+    _id
+    cartItems {
+      name
+      quantity
+      images {
+        thumbnail
       }
+      price
+      productId
+      quantity
+      
+      
     }
   }
+}
+
 `;
 
 // UPDATE CART ITEM
 export const UPDATE_CART_ITEM = gql`
-  mutation UpdateCartItem($input: UpdateCartItemInput!) {
-    updateCartItem(input: $input) {
+  mutation UpdateCartItem($userId: ID, $cartId: String, $productId: ID!, $quantity: Int!) {
+    updateCartItem(userId: $userId, cartId: $cartId, productId: $productId, quantity: $quantity) {
+      _id
       cartItems {
         _id
         productId
@@ -88,14 +93,14 @@ export const UPDATE_CART_ITEM = gql`
 
 // REMOVE CART ITEM
 export const REMOVE_CART_ITEM = gql`
-  mutation RemoveCartItem($input: RemoveCartItemInput!) {
-    removeCartItem(input: $input) {
+  mutation RemoveCartItem($userId: ID, $cartId: String, $productId: ID!) {
+    removeCartItem(userId: $userId, cartId: $cartId, productId: $productId) {
+      _id
       cartItems {
-        _id
-        productId
         name
-        price
         quantity
+        price
+        productId
         images {
           thumbnail
         }

@@ -1,14 +1,26 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import type { RootState } from "../../types";
+import client from "../../../GraphqlOprations/apolloClient";
+import { GET_CART } from "../../../GraphqlOprations/queries";
+import { REMOVE_CART_ITEM, CLEAR_CART, ADD_TO_CART_ITEMS, UPDATE_CART_ITEM } from "../../../GraphqlOprations/mutation";
 
+// ================= TYPES =================
 export type CartItem = {
   _id: string;
   productId: string;
   name: string;
   price: number;
-  images: { thumbnail: string };
   quantity: number;
+  thumbnail: string;
+};
+
+export type Product = {
+  _id?: string;
+  id?: string;
+  name: string;
+  price: number;
+  images: { thumbnail: string };
 };
 
 type CartState = {
@@ -17,6 +29,7 @@ type CartState = {
   error: string | null;
 };
 
+// ================= HELPERS =================
 const getCartId = () => {
   let cartId = localStorage.getItem("guestCartId");
   if (!cartId) {
@@ -26,95 +39,143 @@ const getCartId = () => {
   return cartId;
 };
 
-// FETCH CART
-export const fetchCart = createAsyncThunk<
-  CartItem[],
-  void,
-  { rejectValue: string }
->("cart/fetch", async (_, { rejectWithValue }) => {
-  try {
-    const res = await axios.get(
-      `${import.meta.env.VITE_API_BASE}api/cart/get-cart?cartId=${getCartId()}`,
-      { withCredentials: true }
-    );
-    return res.data.cartItems || [];
-  } catch (err) {
-    console.log(err)
-    return rejectWithValue("Could not load cart");
-  }
-});
+const getUserId = () => localStorage.getItem("userId");
 
-//  ADD TO CART
-export const addToCart = createAsyncThunk<
-  CartItem[],
-  { productId: string; quantity?: number },
-  { rejectValue: string }
->("cart/add", async ({ productId, quantity = 1 }, { rejectWithValue }) => {
-  try {
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_BASE}api/cart/add-to-cart`,
-      { productId, quantity, cartId: getCartId() },
-      { withCredentials: true }
-    );
-    toast.success("Added to cart");
-    return res.data.cartItems || [];
-  } catch {
-    toast.error("Failed to add");
-    return rejectWithValue("Failed to add");
-  }
-});
-
-//  UPDATE QUANTITY
-export const updateQuantity = createAsyncThunk<
-  CartItem[],
-  { productId: string; action: "inc" | "dec" },
-  { state: RootState; rejectValue: string }
->(
-  "cart/updateQty",
-  async ({ productId, action }, { getState, rejectWithValue }) => {
+// ================= FETCH CART =================
+export const fetchCart = createAsyncThunk<CartItem[], void, { rejectValue: string }>(
+  "cart/fetch",
+  async (_, { rejectWithValue }) => {
     try {
-      const item = getState().cart.items.find((i) => i.productId === productId);
-      if (!item) return rejectWithValue("Not found");
-
-      const newQty = action === "inc" ? item.quantity + 1 : item.quantity - 1;
-      if (newQty < 1) return rejectWithValue("Invalid quantity");
-
-      const res = await axios.post(
-        `${import.meta.env.VITE_API_BASE}api/cart/update-qty`,
-        { productId, quantity: newQty, cartId: getCartId() },
-        { withCredentials: true }
-      );
-
-      return res.data.cartItems || [];
-    } catch {
-      toast.error("Update failed");
-      return rejectWithValue("Update failed");
+      const { data } = await client.query({
+        query: GET_CART,
+        variables: {
+          userId: getUserId(),
+          cartId: getCartId(),
+        },
+        fetchPolicy: "no-cache",
+      });
+      return data?.getCart?.cartItems || [];
+    } catch (err) {
+      console.error(err);
+      return rejectWithValue("Could not load cart");
     }
   }
 );
 
-//  REMOVE ITEM
+// ================= ADD TO CART =================
+export const addToCart = createAsyncThunk<
+  CartItem[],
+  { product: Product; quantity?: number },
+  { rejectValue: string }
+>("cart/add", async ({ product, quantity = 1 }, { rejectWithValue }) => {
+  try {
+    const { data } = await client.mutate({
+  mutation: ADD_TO_CART_ITEMS,
+  variables: {
+    userId: getUserId(),
+    cartId: getCartId(),
+    item: {
+      productId: product._id || product.id,
+      name: product.name,
+      price: product.price,
+      quantity,
+      thumbnail: product.images?.thumbnail,
+    },
+  },
+});
+
+    toast.success("Added to cart");
+    return data?.addToCart?.cartItems || [];
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to add to cart");
+    return rejectWithValue("Failed to add");
+  }
+});
+
+
+
+// ================= UPDATE QUANTITY =================
+export const updateQuantity = createAsyncThunk<
+  CartItem[],
+  { productId: string; action: "inc" | "dec" },
+  { state: RootState; rejectValue: string }
+>("cart/updateQty", async ({ productId, action }, { getState, rejectWithValue }) => {
+  try {
+    const item = (getState() as RootState).cart.items.find((i) => i.productId === productId);
+    if (!item) return rejectWithValue("Item not found");
+
+    const newQty = action === "inc" ? item.quantity + 1 : item.quantity - 1;
+    if (newQty < 1) return rejectWithValue("Invalid quantity");
+
+   const { data } = await client.mutate({
+  mutation: UPDATE_CART_ITEM,
+  variables: {
+    userId: getUserId(),
+    cartId: getCartId(),
+    productId,
+    quantity: newQty,
+  },
+});
+
+    return data?.updateCartItem?.cartItems || [];
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to update quantity");
+    return rejectWithValue("Update failed");
+  }
+});
+
+
+// ================= REMOVE ITEM =================
 export const removeItem = createAsyncThunk<
   CartItem[],
   { productId: string },
   { rejectValue: string }
 >("cart/remove", async ({ productId }, { rejectWithValue }) => {
   try {
-    const res = await axios.post(
-      `${import.meta.env.VITE_API_BASE}api/cart/remove-item`,
-      { productId, cartId: getCartId() },
-      { withCredentials: true }
-    );
-    toast.success("Removed");
-    return res.data.cartItems || [];
-  } catch {
+    const { data } = await client.mutate({
+      mutation: REMOVE_CART_ITEM,
+      variables: {
+        userId: getUserId(),
+        cartId: getCartId(),
+        productId,
+      },
+    });
+
+    toast.success("Removed from cart");
+    return data?.removeCartItem?.cartItems || [];
+  } catch (err) {
+    console.error(err);
     toast.error("Remove failed");
     return rejectWithValue("Remove failed");
   }
 });
 
-// SLICE
 
+// ================= CLEAR CART =================
+export const clearCart = createAsyncThunk<boolean, void, { rejectValue: string }>(
+  "cart/clear",
+  async (_, { rejectWithValue }) => {
+    try {
+      await client.mutate({
+        mutation: CLEAR_CART,
+        variables: {
+          userId: getUserId(),
+          cartId: getCartId(),
+        },
+      });
+      toast.success("Cart cleared");
+      return true;
+    } catch (err) {
+      console.error(err);
+      toast.error("Clear cart failed");
+      return rejectWithValue("Clear failed");
+    }
+  }
+);
+
+// ================= SLICE =================
 const initialState: CartState = {
   items: [],
   status: "idle",
@@ -127,7 +188,6 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-
       // FETCH
       .addCase(fetchCart.pending, (state) => {
         state.status = "loading";
@@ -140,29 +200,24 @@ const cartSlice = createSlice({
         state.status = "error";
         state.error = action.payload || "Error loading cart";
       })
-
       // ADD
       .addCase(addToCart.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(addToCart.rejected, (state, action) => {
-        state.error = action.payload || "Error adding";
-      })
-
-      // UPDATE QTY
-      .addCase(updateQuantity.fulfilled, (state, action) => {
-        state.items = action.payload;
-      })
-      .addCase(updateQuantity.rejected, (state, action) => {
-        state.error = action.payload || "Error updating";
-      })
-
       // REMOVE
       .addCase(removeItem.fulfilled, (state, action) => {
         state.items = action.payload;
       })
-      .addCase(removeItem.rejected, (state, action) => {
-        state.error = action.payload || "Error removing";
+      // CLEAR
+      .addCase(clearCart.fulfilled, (state) => {
+        state.items = [];
+      })
+      // UPDATE QUANTITY
+      .addCase(updateQuantity.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(updateQuantity.rejected, (state, action) => {
+        state.error = action.payload || "Error updating cart";
       });
   },
 });
