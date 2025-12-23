@@ -6,6 +6,7 @@ import {
   removeItem,
   selectCartItems,
   updateQuantity,
+  clearCart,
 } from "../../../Redux Toolkit/features/cart/cartSlice";
 
 const CartPage = () => {
@@ -114,7 +115,7 @@ const CartPage = () => {
               })}
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-lg h-fit">
+            <div className="flex flex-col bg-white rounded-xl p-6 shadow-lg h-fit gap-2">
               <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
               <div className="flex justify-between text-lg mb-3">
                 <span>Total Items:</span>
@@ -124,6 +125,14 @@ const CartPage = () => {
                 <span>Total Price:</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
+
+              <button
+                className="w-full py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition text-lg font-semibold"
+                onClick={() => dispatch(clearCart())}
+              >
+                Clear Cart
+              </button>
+
               <NavLink to="/cart/check-out">
                 <button className="w-full py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-700 transition text-lg font-semibold">
                   Proceed to Checkout

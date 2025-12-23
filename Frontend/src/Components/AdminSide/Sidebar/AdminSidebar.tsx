@@ -11,24 +11,46 @@ import {
 import { NavLink } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGOUT_USER } from "../../../GraphqlOprations/mutation";
 
 interface SidebarProps {
   sidebarOpen: boolean;
 }
 
 const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
-     const handleLogout = async () => {
+  // Use the GraphQL mutation for logout
+  const [logoutUser, { loading: logoutLoading }] = useMutation(LOGOUT_USER, {
+    onCompleted: (data) => {
+      if (data.logoutUser.success) {
+        toast.success(data.logoutUser.message || "Logged out successfully!");
+        navigate("/");
+      } else {
+        toast.error(data.logoutUser.message || "Logout failed");
+      }
+    },
+    onError: (error) => {
+      console.error("Logout error:", error);
+      toast.error("Logout failed. Please try again.");
+    },
+  });
+
+  const handleLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+
+    if (logoutLoading) return; 
+
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE}api/auth/loging/logout`, {}, { withCredentials: true });
-      toast.success("Logged out successfully!");
-      Navigate("/");
+      await logoutUser();
     } catch (error) {
-      console.error(error);
-      toast.error("Logout failed");
+      console.error("Logout failed:", error);
     }
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
   };
+
   return (
     <aside
       className={`${
@@ -80,11 +102,11 @@ const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
           {sidebarOpen && <span>Orders</span>}
         </NavLink>
 
-         <NavLink
+        <NavLink
           to="/dashboard/client/messages"
           className="flex items-center gap-3 px-6 py-3 hover:bg-gray-700 transition"
         >
-          <MessageSquareDot  size={20} />
+          <MessageSquareDot size={20} />
           {sidebarOpen && <span>Client Messages</span>}
         </NavLink>
 
@@ -98,14 +120,18 @@ const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
 
         <div className="border-t border-gray-700 mt-4"></div>
 
-        <NavLink
-          to="/"
+        <a
+          href="#"
           onClick={handleLogout}
-          className="flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-gray-700 transition"
+          className={`flex items-center gap-3 px-6 py-3 text-red-400 hover:bg-gray-700 transition ${
+            logoutLoading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
         >
           <LogOut size={20} />
-          {sidebarOpen && <span>Logout</span>}
-        </NavLink>
+          {sidebarOpen && (
+            <span>{logoutLoading ? "Logging out..." : "Logout"}</span>
+          )}
+        </a>
       </nav>
     </aside>
   );

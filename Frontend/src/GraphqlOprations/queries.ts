@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const GET_ALL_PRODUCTS = gql`
  query GettAllProduct{
   products {
-    id
+    _id
     name
     description
     shortDescription
@@ -95,6 +95,7 @@ export const GET_ORDERS = gql`
       _id
       userId
       user {
+        _id
         fullname
         email
       }
@@ -103,9 +104,6 @@ export const GET_ORDERS = gql`
         name
         price
         quantity
-        images {
-          thumbnail
-        }
       }
       totalPrice
       status
@@ -118,7 +116,7 @@ export const GET_ORDERS = gql`
       }
       createdAt
     }
-  }
+  }          
 `;
 
 export const GET_SINGLE_MESSAGE = gql`

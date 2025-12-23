@@ -3,7 +3,7 @@ import { setContext } from "@apollo/client/link/context";
 import { from } from "@apollo/client";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4100/",
+  uri: "http://localhost:4100/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -11,7 +11,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      Authorization: token ? `Bearer ${token}` : "",
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });

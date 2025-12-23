@@ -52,10 +52,22 @@ const resolvers = {
       return cart;
     },
 
-    // Admin all orders
-    getOrders: async () => {
-      return await Order.find().sort({ createdAt: -1 });
-    },
+   // Admin all orders
+getOrders: async (_, __, context) => {
+  try {
+    const orders = await Order.find()
+      .populate("userId", "fullname email")
+      .lean(); 
+    
+    return orders.map((order) => ({
+      ...order,
+      user: order.userId, 
+    }));
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw new Error("Failed to fetch orders");
+  }
+},
 
     // User own orders
     getUserOrders: async (_, { userId }) => {
@@ -63,9 +75,20 @@ const resolvers = {
     },
 
     // Single order
-    getOrderById: async (_, { orderId }) => {
-      return await Order.findById(orderId);
-    },
+   getOrderById: async (_, { orderId }) => {
+  const order = await Order.findById(orderId)
+    .populate("userId", "fullname email")
+    .lean();
+  
+  if (!order) {
+    throw new Error("Order not found");
+  }
+  
+  return {
+    ...order,
+    user: order.userId,
+  };
+},
 
     // Admin: fetch all messages
     getContactMessages: async () => {
@@ -140,7 +163,6 @@ const resolvers = {
     // Logout User
     logoutUser: async (_parent, _args, context) => {
       try {
-        // For JWT, logout is typically handled client-side by removing token
         if (context.res?.clearCookie) {
           context.res.clearCookie("token");
         }
@@ -162,43 +184,200 @@ const resolvers = {
       if (!["admin", "customer"].includes(role)) {
         throw new Error("Invalid role");
       }
-
       const updatedUser = await User.findByIdAndUpdate(
         userId,
         { role },
         { new: true }
       );
-
       if (!updatedUser) {
         throw new Error("User not found");
       }
-
       return updatedUser;
     },
 
     // Delete User
     deleteUser: async (_, { userId }) => {
       const deletedUser = await User.findByIdAndDelete(userId);
-
       if (!deletedUser) {
         throw new Error("User not found");
       }
-
       return "User deleted successfully";
     },
 
     // Add Product
     addProduct: async (_, { productNew }) => {
-      const id = randomBytes(5).toString("hex");
+      try {
+        const id = randomBytes(5).toString("hex");
+        const processedData = {
+          ...productNew,
+          images: {
+            thumbnail: productNew.images?.thumbnail || null,
+            detailImage: productNew.images?.detailImage || null,
+            gallery: productNew.images?.gallery || [],
+          },
+          specifications: {
+            capacity: productNew.specifications?.capacity || null,
+            material: productNew.specifications?.material || null,
+            color: productNew.specifications?.color || null,
+            weight: productNew.specifications?.weight || null,
+          },
+        };
 
-      const newProduct = new Product({
-        id,
-        ...productNew,
-      });
+        const newProduct = new Product({
+          id,
+          ...processedData,
+        });
 
-      await newProduct.save();
+        await newProduct.save();
+        console.log("Product saved successfully:", newProduct);
+        return newProduct;
+      } catch (error) {
+        console.error("Error in addProduct resolver:", error);
+        throw new Error(`Failed to add product: ${error.message}`);
+      }
+    },
 
-      return newProduct;
+    //Update Product
+    updateProduct: async (_, { productId, productUpdate }) => {
+      try {
+        console.log("Updating product ID:", productId);
+
+        // Try to find product by _id (ObjectId) or custom id field
+        let existingProduct;
+
+        // Check if productId looks like a MongoDB ObjectId (24 hex chars)
+        if (/^[0-9a-fA-F]{24}$/.test(productId)) {
+          existingProduct = await Product.findOne({ _id: productId });
+        }
+
+        // If not found by _id, try by custom id field
+        if (!existingProduct) {
+          existingProduct = await Product.findOne({ id: productId });
+        }
+
+        if (!existingProduct) {
+          throw new Error(`Product with ID ${productId} not found`);
+        }
+
+        console.log("Found product to update:", existingProduct._id);
+
+        // Process update data (similar to addProduct)
+        const updateData = {
+          name: productUpdate.name || existingProduct.name,
+          category: productUpdate.category || existingProduct.category,
+          price:
+            productUpdate.price !== undefined
+              ? productUpdate.price
+              : existingProduct.price,
+          rating:
+            productUpdate.rating !== undefined
+              ? productUpdate.rating
+              : existingProduct.rating,
+          description:
+            productUpdate.description !== undefined
+              ? productUpdate.description
+              : existingProduct.description,
+          shortDescription:
+            productUpdate.shortDescription !== undefined
+              ? productUpdate.shortDescription
+              : existingProduct.shortDescription,
+          availability:
+            productUpdate.availability ||
+            existingProduct.availability ||
+            "In Stock",
+        };
+
+        // Handle images
+        if (productUpdate.images || existingProduct.images) {
+          updateData.images = {
+            thumbnail:
+              productUpdate.images?.thumbnail ||
+              existingProduct.images?.thumbnail ||
+              null,
+            detailImage:
+              productUpdate.images?.detailImage ||
+              existingProduct.images?.detailImage ||
+              null,
+            gallery:
+              productUpdate.images?.gallery ||
+              existingProduct.images?.gallery ||
+              [],
+          };
+        }
+
+        // Handle specifications
+        if (productUpdate.specifications || existingProduct.specifications) {
+          updateData.specifications = {
+            capacity:
+              productUpdate.specifications?.capacity ||
+              existingProduct.specifications?.capacity ||
+              null,
+            material:
+              productUpdate.specifications?.material ||
+              existingProduct.specifications?.material ||
+              null,
+            color:
+              productUpdate.specifications?.color ||
+              existingProduct.specifications?.color ||
+              null,
+            weight:
+              productUpdate.specifications?.weight ||
+              existingProduct.specifications?.weight ||
+              null,
+          };
+        }
+
+        // Update the product - Use findOneAndUpdate for both _id and custom id
+        let updatedProduct;
+        if (/^[0-9a-fA-F]{24}$/.test(productId)) {
+          updatedProduct = await Product.findOneAndUpdate(
+            { _id: productId },
+            { $set: updateData },
+            { new: true, runValidators: true }
+          );
+        } else {
+          updatedProduct = await Product.findOneAndUpdate(
+            { id: productId },
+            { $set: updateData },
+            { new: true, runValidators: true }
+          );
+        }
+
+        if (!updatedProduct) {
+          throw new Error("Failed to update product");
+        }
+
+        console.log("Product updated successfully:", updatedProduct);
+        return updatedProduct;
+      } catch (error) {
+        console.error("Update product error:", error);
+        throw new Error(`Failed to update product: ${error.message}`);
+      }
+    },
+
+    // Delete Product
+    deleteProduct: async (_, { productId }) => {
+      try {
+        console.log("Deleting product ID:", productId);
+
+        let result;
+
+        if (/^[0-9a-fA-F]{24}$/.test(productId)) {
+          result = await Product.findOneAndDelete({ _id: productId });
+        } else {
+          result = await Product.findOneAndDelete({ id: productId });
+        }
+
+        if (!result) {
+          throw new Error(`Product with ID ${productId} not found`);
+        }
+
+        console.log("Product deleted successfully:", productId);
+        return "Product deleted successfully";
+      } catch (error) {
+        console.error("Delete product error:", error);
+        throw new Error(`Failed to delete product: ${error.message}`);
+      }
     },
 
     // Add to Cart
@@ -246,7 +425,7 @@ const resolvers = {
       if (!item) throw new Error("Item not found");
 
       item.quantity = quantity;
-      await cart.save();
+      await cart.save;
 
       return cart;
     },
@@ -266,15 +445,31 @@ const resolvers = {
     },
 
     // CLEAR CART
-    clearCart: async (_, { userId, cartId }) => {
-      await Cart.findOneAndDelete(userId ? { userId } : { cartId });
-      return "Cart cleared successfully";
+    clearCart: async (_, { userId, cartId }, context) => {
+      let query = null;
+      if (userId) query = { userId };
+      else if (cartId) query = { cartId };
+      else if (context.user?.userId) query = { userId: context.user.userId };
+      else throw new Error("Authentication required or provide cartId/userId");
+
+      const cart = await Cart.findOne(query);
+      if (!cart) throw new Error("Cart not found");
+
+      cart.cartItems = [];
+      await cart.save();
+
+      return { success: true, message: "Cart cleared" };
     },
 
     // Create Order
-    createOrder: async (_, { userId, items, totalPrice, shippingDetails }) => {
+    createOrder: async (_, { items, totalPrice, shippingDetails }, context) => {
+      console.log("CONTEXT USER:", context.user);
+      if (!context.user) {
+        throw new Error("Authentication required");
+      }
+
       const order = new Order({
-        userId: userId || null,
+        userId: context.user.id || context.user._id,
         items,
         totalPrice,
         shippingDetails,

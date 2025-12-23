@@ -174,7 +174,6 @@ export const clearCart = createAsyncThunk<boolean, void, { rejectValue: string }
     }
   }
 );
-
 // ================= SLICE =================
 const initialState: CartState = {
   items: [],

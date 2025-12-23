@@ -1,18 +1,27 @@
 import React, { useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import client from "../../../GraphqlOprations/apolloClient";
+
 import { useAppDispatch, useAppSelector } from "../../../Redux Toolkit/hooks";
 import {
   removeItem,
   selectCartItems,
   updateQuantity,
+  clearCart
+ 
 } from "../../../Redux Toolkit/features/cart/cartSlice";
+
+import { CREATE_ORDER } from "../../../GraphqlOprations/mutation";
 
 const CheckOut: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCartItems);
+
+  const [createOrder] = useMutation(CREATE_ORDER, {client});
 
   const totalPrice = useMemo(() => {
     return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -38,35 +47,26 @@ const CheckOut: React.FC = () => {
     setLoading(true);
 
     try {
-      const orderData = {
-        items: cart.map((item) => ({
-          productId: item.productId,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-        shippingDetails: {
-          fullName,
-          email,
-          phone,
-          city,
-          address,
+      await createOrder({
+        variables: {
+          items: cart.map((item) => ({
+            productId: item.productId,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+          totalPrice,
+          shippingDetails: {
+            fullName,
+            email,
+            phone,
+            city,
+            address,
+          },
         },
-        totalPrice,
-      };
-
-
-      await axios.post(
-        `${import.meta.env.VITE_API_BASE}api/order/place-order`,
-        orderData,
-        { withCredentials: true }
-      );
+      });
 
       toast.success("Order placed successfully!");
-
-      for (const item of cart) {
-        dispatch(removeItem({ productId: item.productId }));
-      }
 
       setFullName("");
       setEmail("");
@@ -79,20 +79,13 @@ const CheckOut: React.FC = () => {
       }, 1500);
     } catch (error: unknown) {
       console.error("Error placing order:", error);
-
-      if (axios.isAxiosError(error)) {
-        toast.error(
-          error.response?.data?.message ||
-            "Failed to place order. Please try again."
-        );
-      } else if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("Failed to place order. Please try again.");
-      }
+      const errorMessage = error instanceof Error ? error.message : "Failed to place order. Please try again.";
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
+      dispatch(clearCart());
     }
+
   };
 
   return (
@@ -113,7 +106,7 @@ const CheckOut: React.FC = () => {
             >
               <div className="flex items-center gap-4">
                 <img
-                  src={item.images?.thumbnail || "/placeholder.jpg"}
+                  src={item.thumbnail || "/placeholder.jpg"}
                   alt={item.name}
                   className="w-16 h-16 object-cover rounded"
                 />
@@ -137,7 +130,9 @@ const CheckOut: React.FC = () => {
                 >
                   -
                 </button>
+
                 <span>{item.quantity}</span>
+
                 <button
                   onClick={() =>
                     dispatch(
@@ -156,7 +151,7 @@ const CheckOut: React.FC = () => {
                   onClick={() =>
                     dispatch(removeItem({ productId: item.productId }))
                   }
-                  className="ml-4 text-white hover:underline bg-red-500 px-2 py-1 rounded-sm hover:bg-red-600 hover:scale-95"
+                  className="ml-4 bg-red-500 text-white px-2 py-1 rounded-sm hover:bg-red-600"
                 >
                   Remove
                 </button>
@@ -173,7 +168,7 @@ const CheckOut: React.FC = () => {
         )}
       </div>
 
-      {/* CHECKOUT FORM */}
+      {/* SHIPPING FORM */}
       <div className="bg-white shadow-md rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-4">Shipping Details</h2>
 

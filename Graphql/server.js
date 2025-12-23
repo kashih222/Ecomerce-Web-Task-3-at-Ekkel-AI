@@ -22,17 +22,24 @@ app.use(express.json());
 
 // JWT middleware
 app.use((req, res, next) => {
+  console.log("AUTH HEADERS:", req.headers.authorization); 
   const authHeader = req.headers.authorization;
+
   if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.split(" ")[1];
     try {
       req.user = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("JWT USER:", req.user); 
     } catch {
       req.user = null;
     }
+  } else {
+    console.log("NO AUTH HEADER"); 
   }
+
   next();
 });
+
 
 // Apollo Server
 const server = new ApolloServer({
@@ -47,7 +54,7 @@ const server = new ApolloServer({
 await server.start();
 server.applyMiddleware({
   app,
-  path: "/",
+  path: "/graphql",
   cors: false,
 });
 

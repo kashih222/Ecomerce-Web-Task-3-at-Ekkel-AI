@@ -13,7 +13,7 @@ const typeDefs = `
   }
 
   type Product {
-    id: ID!
+    _id: ID!
     name: String!
     category: String!
     price: Float!   
@@ -49,30 +49,30 @@ const typeDefs = `
     password: String!
   }
 
-  input ProductInput {
-    name: String!
-    category: String!
-    price: Float!
-    rating: Float
-    description: String
-    shortDescription: String
-    images: ImageInput
-    specifications: SpecificationInput
-    availability: String
-  }
+input ProductInput {
+  name: String!
+  category: String!
+  price: Float!
+  rating: Float
+  description: String
+  shortDescription: String
+  images: ImageInput
+  specifications: SpecificationInput
+  availability: String
+}
 
-  input ImageInput {
-    thumbnail: String
-    gallery: [String]
-    detailImage: String
-  }
+input ImageInput {
+  thumbnail: String
+  gallery: [String]
+  detailImage: String
+}
 
-  input SpecificationInput {
-    capacity: String
-    material: String
-    color: String
-    weight: String
-  }
+input SpecificationInput {
+  capacity: String
+  material: String
+  color: String
+  weight: String
+}
 
   
 
@@ -124,16 +124,17 @@ input CartItemInput {
     address: String
   }
 
-  type Order {
-    _id: ID!
-    userId: ID
-    items: [OrderItem!]!
-    totalPrice: Float!
-    shippingDetails: ShippingDetails
-    status: String
-    createdAt: String
-    updatedAt: String
-  }
+type Order {
+  _id: ID!
+  userId: ID
+  user: User  # Add this line
+  items: [OrderItem!]!
+  totalPrice: Float!
+  shippingDetails: ShippingDetails
+  status: String
+  createdAt: String
+  updatedAt: String
+}
 
   input OrderItemInput {
     productId: ID!
@@ -192,13 +193,18 @@ input CartItemInput {
     logoutUser: LogoutResponse!
 
     addProduct(productNew: ProductInput!): Product
+    updateProduct(productId: ID!, productUpdate: ProductInput!): Product
+    deleteProduct(productId: ID!): String
+
     updateUserRole(userId: ID!, role: String!): User
     deleteUser(userId: ID!): String
     addToCart(userId: ID cartId: String item: CartItemInput!): Cart
     updateCartItem(userId: ID cartId: String productId: ID! quantity: Int!): Cart
     removeCartItem(userId: ID cartId: String productId: ID!): Cart
-    clearCart(userId: ID cartId: String): String
+    clearCart(userId: ID cartId: String): LogoutResponse!
+    
     createOrder(userId: ID items: [OrderItemInput!]! totalPrice: Float! shippingDetails: ShippingInput): Order
+
     updateOrderStatus(orderId: ID!, status: String!): Order
     deleteOrder(orderId: ID!): String
     addContactMessage(contactInput: ContactMessageInput!): ContactMessage

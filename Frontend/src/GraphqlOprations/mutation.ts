@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// SignUp USer
 export const SIGN_UP_USER = gql`
   mutation SignupUser($userNew: UserInput!) {
     signupUser(userNew: $userNew) {
@@ -33,6 +34,8 @@ export const LOGOUT_USER = gql`
   }
 `;
 
+
+//update user role
 export const UPDATE_USER_ROLE = gql`
   mutation UpdateUserRole($userId: ID!, $role: String!) {
     updateUserRole(userId: $userId, role: $role) {
@@ -44,6 +47,8 @@ export const UPDATE_USER_ROLE = gql`
   }
 `;
 
+
+// delete User
 export const DELETE_USER = gql`
   mutation DeleteUser($userId: ID!) {
     deleteUser(userId: $userId)
@@ -111,21 +116,21 @@ export const REMOVE_CART_ITEM = gql`
 
 // CLEAR CART
 export const CLEAR_CART = gql`
-  mutation ClearCart($input: ClearCartInput!) {
-    clearCart(input: $input) {
+  mutation ClearCart($userId: ID, $cartId: String) {
+    clearCart(userId: $userId, cartId: $cartId) {
       success
+      message
     }
   }
 `;
+
 export const CREATE_ORDER = gql`
   mutation CreateOrder(
-    $userId: ID
     $items: [OrderItemInput!]!
     $totalPrice: Float!
     $shippingDetails: ShippingInput
   ) {
     createOrder(
-      userId: $userId
       items: $items
       totalPrice: $totalPrice
       shippingDetails: $shippingDetails
@@ -165,10 +170,12 @@ export const SEND_CONTACT_MESSAGE = gql`
 export const ADD_PRODUCT = gql`
   mutation AddProduct($productNew: ProductInput!) {
     addProduct(productNew: $productNew) {
-      _id
+      _id  
       name
-      price
       category
+      price
+      rating
+      availability
     }
   }
 `;
@@ -176,9 +183,25 @@ export const ADD_PRODUCT = gql`
 export const UPDATE_PRODUCT = gql`
   mutation UpdateProduct($productId: ID!, $productUpdate: ProductInput!) {
     updateProduct(productId: $productId, productUpdate: $productUpdate) {
-      _id
+      _id  
       name
       price
+      category
+      availability
+      rating
+      description
+      shortDescription
+      images {
+        thumbnail
+        detailImage
+        gallery
+      }
+      specifications {
+        capacity
+        material
+        color
+        weight
+      }
     }
   }
 `;
