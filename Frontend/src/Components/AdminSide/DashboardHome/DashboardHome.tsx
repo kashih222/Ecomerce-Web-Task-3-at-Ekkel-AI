@@ -20,6 +20,7 @@ interface OrderItem {
 }
 
 interface Order {
+
   _id: string;
   userId?: string;
   user?: {
@@ -27,6 +28,7 @@ interface Order {
     fullname: string;
     email: string;
   };
+
   shippingDetails?: {
     fullName?: string;
     email?: string;
@@ -34,6 +36,7 @@ interface Order {
     city?: string;
     address?: string;
   };
+
   items: OrderItem[];
   totalPrice: number;
   status: string;
@@ -61,12 +64,7 @@ const DashboardHome: React.FC = () => {
       0
     );
 
-    const recentOrders = [...orders]
-      .sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-      .slice(0, 20);
+    const recentOrders = [...orders].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime() ) .slice(0, 20);
 
     return {
       totalUsers,
@@ -176,10 +174,10 @@ const DashboardHome: React.FC = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white p-5 rounded-lg shadow `min-h-[300px]` flex items-center justify-center">
+        <div className="bg-white p-5 rounded-lg shadow min-h-75 flex items-center justify-center">
           <CategoryBarChart products={dashboardStats.products} />
         </div>
-        <div className="bg-white p-5 rounded-lg shadow `min-h-[300px]` flex items-center justify-center">
+        <div className="bg-white p-5 rounded-lg shadow min-h-75 flex items-center justify-center">
           <MarkOptimizationChart orders={dashboardStats.orders} />
         </div>
       </div>

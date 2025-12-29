@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
-import { GET_CONTACT_MESSAGES, GET_SINGLE_MESSAGE } from "../../../GraphqlOprations/queries";
+import {
+  GET_CONTACT_MESSAGES,
+  GET_SINGLE_MESSAGE,
+} from "../../../GraphqlOprations/queries";
 import { DELETE_CONTACT_MESSAGE } from "../../../GraphqlOprations/mutation";
 
 interface ContactMessage {
@@ -10,7 +13,7 @@ interface ContactMessage {
   email: string;
   subject: string;
   message: string;
-  createdAt?: string;
+  createdAt: string | number;
 }
 
 interface GetContactMessagesData {
@@ -26,41 +29,47 @@ const AdminContactMessages: React.FC = () => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
 
   // GraphQL Queries
-  const { data, loading, error, refetch } = useQuery<GetContactMessagesData>(GET_CONTACT_MESSAGES);
-  
-  const [fetchSingleMessage, { data: singleMessageData, loading: singleMessageLoading }] = 
-    useLazyQuery<GetSingleMessageData>(GET_SINGLE_MESSAGE, {
-      onCompleted: (data) => {
-        if (data?.getContactMessageById) {
-          setModalOpen(true);
-        }
-      },
-      onError: (error) => {
-        toast.error(`Error fetching message: ${error.message}`);
-      },
-      fetchPolicy: "network-only" 
-    });
+  const { data, loading, error, refetch } =
+    useQuery<GetContactMessagesData>(GET_CONTACT_MESSAGES);
 
-  // GraphQL Mutations
-  const [deleteContactMessage, { loading: deleteLoading }] = useMutation(DELETE_CONTACT_MESSAGE, {
-    onCompleted: () => {
-      toast.success("Message deleted successfully");
-      setDeleteId(null);
-      refetch(); 
+  const [
+    fetchSingleMessage,
+    { data: singleMessageData, loading: singleMessageLoading },
+  ] = useLazyQuery<GetSingleMessageData>(GET_SINGLE_MESSAGE, {
+    onCompleted: (data) => {
+      if (data?.getContactMessageById) {
+        setModalOpen(true);
+      }
     },
     onError: (error) => {
-      toast.error(`Error deleting message: ${error.message}`);
-      setDeleteId(null);
-    }
+      toast.error(`Error fetching message: ${error.message}`);
+    },
+    fetchPolicy: "network-only",
   });
+
+  //  Mutations
+  const [deleteContactMessage, { loading: deleteLoading }] = useMutation(
+    DELETE_CONTACT_MESSAGE,
+    {
+      onCompleted: () => {
+        toast.success("Message deleted successfully");
+        setDeleteId(null);
+        refetch();
+      },
+      onError: (error) => {
+        toast.error(`Error deleting message: ${error.message}`);
+        setDeleteId(null);
+      },
+    }
+  );
 
   const messages = data?.getContactMessages || [];
   const selectedMessage = singleMessageData?.getContactMessageById;
 
   const openMessage = async (messageId: string): Promise<void> => {
     try {
-      await fetchSingleMessage({ 
-        variables: { messageId } 
+      await fetchSingleMessage({
+        variables: { messageId },
       });
     } catch (error) {
       console.error("Error fetching message:", error);
@@ -72,7 +81,7 @@ const AdminContactMessages: React.FC = () => {
 
     try {
       await deleteContactMessage({
-        variables: { messageId: deleteId }
+        variables: { messageId: deleteId },
       });
     } catch (error) {
       console.error("Error deleting message:", error);
@@ -123,8 +132,19 @@ const AdminContactMessages: React.FC = () => {
                   <td className="p-4">{msg.subject}</td>
                   <td className="p-4 max-w-xs truncate">{msg.message}</td>
                   <td className="p-4">
-                    {msg.createdAt ? new Date(msg.createdAt).toLocaleDateString() : "N/A"}
-                  </td>
+  {msg.createdAt ? (
+    (() => {
+      const timestamp = typeof msg.createdAt === 'string' 
+        ? parseInt(msg.createdAt) 
+        : msg.createdAt;
+      
+      const date = new Date(timestamp);
+      return isNaN(date.getTime()) 
+        ? "Invalid Date" 
+        : date.toLocaleString();
+    })()
+  ) : "N/A"}
+</td>
 
                   <td className="p-4 flex gap-3">
                     <button
@@ -152,22 +172,31 @@ const AdminContactMessages: React.FC = () => {
 
       {/* Modal for viewing message */}
       {modalOpen && selectedMessage && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-          onClick={() => setModalOpen(false)} 
+          onClick={() => setModalOpen(false)}
         >
-          <div 
+          <div
             className="bg-white rounded-xl p-6 w-full max-w-lg shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="text-xl font-bold mb-4">Message Details</h2>
 
             <div className="space-y-2 mb-4">
-              <p><strong>Name:</strong> {selectedMessage.fullName}</p>
-              <p><strong>Email:</strong> {selectedMessage.email}</p>
-              <p><strong>Subject:</strong> {selectedMessage.subject}</p>
+              <p>
+                <strong>Name:</strong> {selectedMessage.fullName}
+              </p>
+              <p>
+                <strong>Email:</strong> {selectedMessage.email}
+              </p>
+              <p>
+                <strong>Subject:</strong> {selectedMessage.subject}
+              </p>
               {selectedMessage.createdAt && (
-                <p><strong>Date:</strong> {new Date(selectedMessage.createdAt).toLocaleString()}</p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {new Date(selectedMessage.createdAt).toLocaleString()}
+                </p>
               )}
             </div>
 
@@ -190,17 +219,18 @@ const AdminContactMessages: React.FC = () => {
 
       {/* Delete confirmation modal */}
       {deleteId && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-          onClick={() => !deleteLoading && setDeleteId(null)} 
+          onClick={() => !deleteLoading && setDeleteId(null)}
         >
-          <div 
+          <div
             className="bg-white w-full max-w-sm rounded-xl p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-xl font-bold mb-3">Delete Message?</h3>
             <p className="text-gray-600 mb-6">
-              Are you sure you want to delete this message? This action cannot be undone.
+              Are you sure you want to delete this message? This action cannot
+              be undone.
             </p>
 
             <div className="flex justify-end gap-3">

@@ -44,9 +44,7 @@ const AdminSidebar: React.FC<SidebarProps> = ({ sidebarOpen }) => {
 
   return (
     <aside
-      className={`${
-        sidebarOpen ? "w-64" : "w-22"
-      } bg-black text-white h-screen transition-all duration-300 sticky left-0 top-0`}
+      className={`${ sidebarOpen ? "w-64" : "w-22" } bg-black text-white h-screen transition-all duration-300 sticky left-0 top-0 z-100`}
     >
       <Link to="/dashboard">
         <div className="ml-2 px-5 py-6 font-bold text-xl transition-all duration-300">

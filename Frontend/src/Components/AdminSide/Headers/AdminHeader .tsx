@@ -20,7 +20,6 @@ interface LoggedUser {
 
 const AdminHeader: React.FC<SidebarProps> = ({ toggleSidebar }) => {
   const [user, setUser] = useState<LoggedUser | null>(() => {
-    // Try to get user from localStorage first (for initial render)
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
@@ -35,19 +34,16 @@ const AdminHeader: React.FC<SidebarProps> = ({ toggleSidebar }) => {
 
   const navigate = useNavigate();
 
-  // Use GraphQL query to fetch logged-in user info
   const { loading } = useQuery(GET_LOGED_IN_USER_INFO, {
     fetchPolicy: "cache-and-network",
     onCompleted: (data) => {
       if (data?.loggedInUser) {
         setUser(data.loggedInUser);
-        // Update localStorage with fresh data
         localStorage.setItem("user", JSON.stringify(data.loggedInUser));
       }
     },
     onError: (error) => {
       console.error("Error fetching user info:", error);
-      // If there's an error, fall back to localStorage data
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         try {
@@ -59,13 +55,10 @@ const AdminHeader: React.FC<SidebarProps> = ({ toggleSidebar }) => {
     }
   });
 
-  // Use the GraphQL mutation for logout
   const [logoutUser, { loading: logoutLoading }] = useMutation(LOGOUT_USER, {
     onCompleted: (data) => {
       if (data.logoutUser.success) {
         toast.success(data.logoutUser.message || "Logged out successfully!");
-        
-        // Clear local storage
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         localStorage.removeItem("user");

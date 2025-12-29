@@ -65,13 +65,11 @@ const resolvers = {
 
     return orders.map((order) => ({
       ...order,
-      // Map userId object to user field
       user: order.userId ? {
         _id: order.userId._id,
         fullname: order.userId.fullname,
         email: order.userId.email
       } : null,
-      // Ensure createdAt is in ISO string format
       createdAt: order.createdAt?.toISOString?.() || order.createdAt,
       updatedAt: order.updatedAt?.toISOString?.() || order.updatedAt
     }));

@@ -11,7 +11,7 @@ const AdminPanelLayout = () => {
       <AdminSidebar sidebarOpen={sidebarOpen} />
       <div className="flex-1 flex flex-col">
         <AdminHeader toggleSidebar={() => setSidebarOpen(!sidebarOpen)} sidebarOpen={sidebarOpen} />
-        <main className="p-6 overflow-y-auto h-[calc(100vh-70px)]">
+        <main className="p-6 overflow-y-auto h-[calc(100vh-70px)] bg-gray-100">
           <Outlet /> 
         </main>
       </div>

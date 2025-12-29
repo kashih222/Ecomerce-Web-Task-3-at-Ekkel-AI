@@ -140,7 +140,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="logo"
-            className="`w-[90px]` hover:scale-95 duration-400 `sm:w-[100px]`  md:w-190px lg:w-120px `xl:w-[150px]`"
+            className="w-24 hover:scale-95 duration-400 sm:w-24  md:w-190px lg:w-120px xl:w-40"
           />
         </NavLink>
 
