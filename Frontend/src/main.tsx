@@ -9,11 +9,7 @@ import  store  from "./Redux Toolkit/store.ts";
 import { ApolloProvider } from "@apollo/client";
 
 
-// const client = new ApolloClient({
-//   uri: import.meta.env.VITE_GRAPHQL_ENDPOINT, 
-//   link: new HttpLink({ uri: 'http://localhost:4100/graphql' }),
-//   cache: new InMemoryCache(),
-// });
+
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
