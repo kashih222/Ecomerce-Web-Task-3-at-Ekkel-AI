@@ -13,8 +13,13 @@ dotenv.config();
 const app = express();
 
 // CORS
+const allowedOrigins = [
+  process.env.CLIENT_URL_PROD, 
+  "http://localhost:5173",
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: allowedOrigins,
   credentials: true,
 }));
 
@@ -40,6 +45,10 @@ app.use((req, res, next) => {
   next();
 });
 
+// Test route to check if server is running
+app.get("/", (req, res) => {
+  res.send("✅ Backend server is running!");
+});
 
 // Apollo Server
 const server = new ApolloServer({
