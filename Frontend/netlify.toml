@@ -1,8 +1,8 @@
 
-  [build]
-  base = "Frontend"
+[build]
+  base = "Frontend"            
   command = "npm install && npm run build"
-  publish = "Frontend/dist"
+  publish = "dist"   
 
 
 [[redirects]]
