@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
 const httpLink = new HttpLink({
-  uri: `${import.meta.env.VITE_BACKEND_PRODUCTION_URL}graphql`,
+  uri: `https://ecomerce-web-task-3-at-ekkel-ai.vercel.app/graphql`,
   credentials: "include",
 });
 
