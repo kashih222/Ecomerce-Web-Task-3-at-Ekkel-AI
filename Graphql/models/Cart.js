@@ -21,14 +21,12 @@ const CartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       default: null,
-      index: true,
     },
 
     // Guest user cart
     cartId: {
       type: String,
       default: null,
-      index: true,
     },
 
     cartItems: [CartItemSchema],
