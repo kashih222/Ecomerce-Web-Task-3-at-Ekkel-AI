@@ -12,49 +12,55 @@ dotenv.config();
 
 const app = express();
 
-// CORS configuration
+// ✅ CORS configuration
 const allowedOrigins = [
   "https://kashihstor.netlify.app",
   "http://localhost:5173",
 ];
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // allow server-to-server & tools like Postman
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`Not allowed by CORS: ${origin}`));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
-// JWT middleware
+// ✅ JWT middleware
 app.use((req, res, next) => {
   const authHeader = req.headers.authorization;
+
   if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.split(" ")[1];
     try {
       req.user = jwt.verify(token, process.env.JWT_SECRET);
     } catch (err) {
-      console.log("JWT verification failed:", err.message);
+      console.log("❌ JWT verification failed:", err.message);
       req.user = null;
     }
   } else {
     req.user = null;
   }
+
   next();
 });
 
-// Test route to check if server is running
+// ✅ Health check route
 app.get("/", (req, res) => {
   res.send("✅ Backend server is running!");
 });
 
-// Initialize Apollo Server
+// ✅ Apollo Server
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -68,10 +74,10 @@ await server.start();
 server.applyMiddleware({
   app,
   path: "/graphql",
-  cors: false, 
+  cors: false,
 });
 
-// Connect to MongoDB
+// ✅ MongoDB
 try {
   await mongoose.connect(process.env.MONGO_URI);
   console.log("✅ MongoDB connected");
@@ -79,7 +85,13 @@ try {
   console.error("❌ MongoDB connection error:", err);
 }
 
-const PORT = process.env.PORT || 4100;
-app.listen(PORT, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-});
+// ⛔ Only listen locally — NOT on Vercel
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 4100;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+  });
+}
+
+// ✅ Export app for Vercel
+export default app;
