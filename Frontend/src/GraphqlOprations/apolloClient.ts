@@ -3,7 +3,7 @@ import { setContext } from "@apollo/client/link/context";
 
 // ✅ GraphQL endpoint from env
 const httpLink = new HttpLink({
-  uri: `${import.meta.env.VITE_BACKEND_PRODUCTION_URL}/graphql`,
+  uri: `${import.meta.env.VITE_BACKEND_PRODUCTION_URL}graphql`,
   credentials: "include",
 });
 
