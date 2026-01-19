@@ -12,14 +12,13 @@ dotenv.config();
 
 const app = express();
 
-// CORS
-const allowedOrigins = [
-  process.env.CLIENT_URL_PROD, 
-  "http://localhost:5173",
-];
+
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: [
+    "https://kashihstor.netlify.app", 
+    "http://localhost:5173"           
+  ],
   credentials: true,
 }));
 
