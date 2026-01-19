@@ -12,13 +12,21 @@ dotenv.config();
 
 const app = express();
 
-
+// CORS configuration
+const allowedOrigins = [
+  "https://kashihstor.netlify.app",
+  "http://localhost:5173",
+];
 
 app.use(cors({
-  origin: [
-    "https://kashihstor.netlify.app", 
-    "http://localhost:5173"           
-  ],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 }));
 
@@ -26,21 +34,18 @@ app.use(express.json());
 
 // JWT middleware
 app.use((req, res, next) => {
-  console.log("AUTH HEADERS:", req.headers.authorization); 
   const authHeader = req.headers.authorization;
-
   if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.split(" ")[1];
     try {
       req.user = jwt.verify(token, process.env.JWT_SECRET);
-      console.log("JWT USER:", req.user); 
-    } catch {
+    } catch (err) {
+      console.log("JWT verification failed:", err.message);
       req.user = null;
     }
   } else {
-    console.log("NO AUTH HEADER"); 
+    req.user = null;
   }
-
   next();
 });
 
@@ -49,7 +54,7 @@ app.get("/", (req, res) => {
   res.send("✅ Backend server is running!");
 });
 
-// Apollo Server
+// Initialize Apollo Server
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -63,12 +68,16 @@ await server.start();
 server.applyMiddleware({
   app,
   path: "/graphql",
-  cors: false,
+  cors: false, 
 });
 
-// MongoDB
-await mongoose.connect(process.env.MONGO_URI);
-console.log("MongoDB connected");
+// Connect to MongoDB
+try {
+  await mongoose.connect(process.env.MONGO_URI);
+  console.log("✅ MongoDB connected");
+} catch (err) {
+  console.error("❌ MongoDB connection error:", err);
+}
 
 const PORT = process.env.PORT || 4100;
 app.listen(PORT, () => {
